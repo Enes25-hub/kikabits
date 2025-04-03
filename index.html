@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
       color: #333;
       margin: 0;
       padding: 0;
-      font-size: 18px;
+      font-size: 20px;
     }
     header, footer {
       background: #ff69b4;
@@ -20,7 +20,7 @@
       padding: 20px;
     }
     h1, h2, p {
-      font-size: 1.6em;
+      font-size: 1.8em;
       line-height: 1.4;
     }
     nav ul {
@@ -38,7 +38,7 @@
       border-radius: 20px;
       text-decoration: none;
       transition: 0.3s;
-      font-size: 1.2em;
+      font-size: 1.4em;
     }
     nav ul li a:hover {
       background: #ff69b4;
@@ -56,11 +56,11 @@
       margin: 5px 0 15px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      font-size: 1em;
+      font-size: 1.2em;
     }
     button {
       padding: 12px 20px;
-      font-size: 1.2em;
+      font-size: 1.4em;
       cursor: pointer;
       border: none;
       border-radius: 8px;
@@ -70,7 +70,7 @@
       background: #0d8cff;
     }
     #kika-img {
-      width: 150px;
+      width: 180px;
       height: auto;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -212,6 +212,22 @@
       document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
       if (!error) document.getElementById('tool-form').reset()
     })
+
+    // Phantom Cüzdan Bağlantısı
+    document.getElementById('connect-wallet').addEventListener('click', () => {
+      if (window.solana && window.solana.isPhantom) {
+        window.solana.request({ method: 'connect' })
+          .then(() => {
+            alert('Phantom cüzdanınız bağlandı!');
+          })
+          .catch((error) => {
+            console.error('Cüzdan bağlantısı hatası:', error);
+            alert('Cüzdan bağlanırken bir hata oluştu.');
+          });
+      } else {
+        alert('Phantom cüzdanı yüklü değil.');
+      }
+    });
   </script>
 </body>
 </html>
