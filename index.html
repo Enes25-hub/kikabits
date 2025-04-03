@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KikaBits Crypto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Open Sans', sans-serif;
       background: linear-gradient(-45deg, #0b0c10, #1f1f2e, #0b0c10, #1f1f2e);
       background-size: 400% 400%;
       animation: oceanFlow 15s ease infinite;
@@ -111,6 +112,21 @@
     <p><strong>Contract Address:</strong><br> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
   </section>
 
+  <section id="stats">
+    <h2>KikaBits Stats</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
+        <strong>Current Price:</strong> <span id="token-price">$0.021</span>
+      </div>
+      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
+        <strong>Community Members:</strong> <span id="user-count">0</span>
+      </div>
+      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
+        <strong>Total AI Tools:</strong> <span id="tool-count">0</span>
+      </div>
+    </div>
+  </section>
+
   <section id="wallet" style="display: none;">
     <h2>Wallet</h2>
     <button id="connect-wallet">Connect Wallet</button>
@@ -152,6 +168,15 @@
     <ul id="user-list"><li>Loading...</li></ul>
   </section>
 
+  <section id="social">
+    <h2>Join the KikaBits Community</h2>
+    <div style="display: flex; gap: 15px;">
+      <a href="https://x.com/EnesS28491677" target="_blank"><button>X</button></a>
+      <a href="https://t.me/kikabits" target="_blank"><button>Telegram</button></a>
+      <a href="https://discord.com/invite/kikabits" target="_blank"><button>Discord</button></a>
+    </div>
+  </section>
+
   <footer>
     <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
     <a href="https://x.com/EnesS28491677" target="_blank">
@@ -161,7 +186,7 @@
 
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-    const supabase = createClient('https://ugzbsmmaxxklogjwlijrt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnemJzbW1heHhrbG9qd2xpanJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM2MDAyNTYsImV4cCI6MjA1OTE3NjI1Nn0.TZr8hu2fldqEyeOZBVxTO-bnQZio6HFqy6LP7AZ085o')
+    const supabase = createClient('https://ugzbsmmaxxklogjwlijrt.supabase.co', 'YOUR_ANON_KEY')
 
     async function init() {
       const session = await supabase.auth.getSession()
@@ -175,8 +200,24 @@
         li.textContent = u.username || u.email || 'Anon'
         list.appendChild(li)
       })
+      document.getElementById('user-count').textContent = users.length
     }
     init()
+
+    setInterval(() => {
+      const basePrice = 0.021;
+      const fluctuation = (Math.random() - 0.5) * 0.002;
+      const price = (basePrice + fluctuation).toFixed(4);
+      document.getElementById('token-price').textContent = `$${price}`;
+    }, 5000);
+
+    async function countAITools() {
+      const { count } = await supabase
+        .from('ai_tools')
+        .select('*', { count: 'exact', head: true });
+      document.getElementById('tool-count').textContent = count ?? 0;
+    }
+    countAITools();
 
     document.getElementById('login-button').onclick = async () => {
       const email = document.getElementById('auth-email').value
@@ -217,6 +258,7 @@
 
       document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
       if (!error) document.getElementById('tool-form').reset()
+      countAITools();
     })
   </script>
 </body>
