@@ -1,67 +1,234 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KikaBits Web</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(to right, #6a1b9a, #0d47a1); /* Gradient background */
-            font-family: 'Open Sans', sans-serif;
-            color: white;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KikaBits Crypto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to right, #6a1b9a, #0d47a1); /* Gradient background */
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
 
-        .header {
-            text-align: center;
-            padding: 50px;
-        }
+    header, footer {
+      background: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
 
-        .header h1 {
-            font-size: 3rem;
-        }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .content {
-            text-align: center;
-        }
+    nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
 
-        .kika-img {
-            width: 150px;
-            height: auto;
-            margin: 20px;
-            transition: transform 0.3s ease;
-        }
+    nav ul li a {
+      color: white;
+      background: #ffb6c1;
+      padding: 8px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
-        .kika-img:hover {
-            transform: scale(1.1);
-        }
+    nav ul li a:hover {
+      background: #ff69b4;
+    }
 
-        button {
-            padding: 10px 20px;
-            background-color: #0d47a1;
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
+    section {
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+      color: #333;
+    }
 
-        button:hover {
-            background-color: #6a1b9a;
-            transform: scale(1.05);
-        }
-    </style>
+    .kika-img {
+      width: 150px;
+      height: auto;
+      margin: 20px;
+      border-radius: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .kika-img:hover {
+      transform: scale(1.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0d47a1;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #6a1b9a;
+      transform: scale(1.05);
+    }
+
+    ul#user-list li {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    #photo-display img {
+      width: 100%;
+      max-width: 200px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Welcome to KikaBits</h1>
-    </div>
-    <div class="content">
-        <img src="images/kika_1.png" alt="Kika the Cat" class="kika-img">
-        <img src="images/kika_2.png" alt="Kika the Cat" class="kika-img">
-        <img src="images/kika_3.png" alt="Kika the Cat" class="kika-img">
-        <button>Join Us Now</button>
-    </div>
+  <header>
+    <img id="kika-img" src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.png" alt="Kika the Cute Cat" />
+    <h1>Welcome to KikaBits</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ai-tools">AI Tools</a></li>
+        <li><a href="#upload-photo">Photo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>About KikaBits</h2>
+    <p>KikaBits is a new cryptocurrency built on the Solana blockchain.</p>
+    <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
+  </section>
+
+  <section id="wallet" style="display: none;">
+    <h2>Wallet</h2>
+    <button id="connect-wallet">Connect Wallet</button>
+  </section>
+
+  <section id="auth-section">
+    <h2>Login / Sign Up</h2>
+    <input type="email" id="auth-email" placeholder="Email" />
+    <input type="password" id="auth-password" placeholder="Password" />
+    <button id="login-button">Login</button>
+    <button id="signup-button">Sign Up</button>
+    <p id="auth-message"></p>
+  </section>
+
+  <section id="user-info" style="display:none;">
+    <p>Welcome, <span id="user-email"></span>!</p>
+    <button id="logout-button">Logout</button>
+  </section>
+
+  <section id="ai-tools">
+    <h2>Create Your Own AI Tool</h2>
+    <form id="tool-form">
+      <input type="text" id="tool-name" placeholder="Tool Name" required />
+      <textarea id="tool-description" placeholder="Description" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="tool-message"></p>
+  </section>
+
+  <section id="upload-photo">
+    <h2>Share a Photo</h2>
+    <input type="file" id="photo-upload" accept="image/*" />
+    <button id="upload-button">Upload Photo</button>
+    <div id="photo-display"></div>
+  </section>
+
+  <section id="users">
+    <h2>Community Users</h2>
+    <ul id="user-list"><li>Loading...</li></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
+    <a href="https://x.com/EnesS28491677" target="_blank">
+      <button style="background:#1DA1F2; color:white; padding:10px 20px; border:none; border-radius:5px;">Visit My X Profile</button>
+    </a>
+  </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    const supabase = createClient('https://ugzbsmmaxxklogjwlijrt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnemJzbW1heHhrbG9qd2xpanJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM2MDAyNTYsImV4cCI6MjA1OTE3NjI1Nn0.TZr8hu2fldqEyeOZBVxTO-bnQZio6HFqy6LP7AZ085o')
+
+    async function init() {
+      const session = await supabase.auth.getSession()
+      if (session.data.session) showUserUI(session.data.session.user.email)
+
+      const { data: users } = await supabase.from('users').select('*')
+      const list = document.getElementById('user-list')
+      list.innerHTML = ''
+      users?.forEach((u) => {
+        const li = document.createElement('li')
+        li.textContent = u.username || u.email || 'Anon'
+        list.appendChild(li)
+      })
+    }
+    init()
+
+    document.getElementById('login-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Login successful'
+      if (data?.user) showUserUI(data.user.email)
+    }
+
+    document.getElementById('signup-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { error } = await supabase.auth.signUp({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Sign up successful! Please check your email.'
+    }
+
+    document.getElementById('logout-button').onclick = async () => {
+      await supabase.auth.signOut()
+      document.getElementById('user-info').style.display = 'none'
+      document.getElementById('auth-section').style.display = 'block'
+    }
+
+    function showUserUI(email) {
+      document.getElementById('user-email').textContent = email
+      document.getElementById('user-info').style.display = 'block'
+      document.getElementById('auth-section').style.display = 'none'
+    }
+
+    document.getElementById('tool-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('You must be logged in!')
+
+      const name = document.getElementById('tool-name').value
+      const description = document.getElementById('tool-description').value
+      const { error } = await supabase.from('ai_tools').insert({ name, description, user_id: user.id })
+
+      document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
+      if (!error) document.getElementById('tool-form').reset()
+    })
+  </script>
 </body>
 </html>
