@@ -44,12 +44,44 @@
       margin: 10px;
       box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
     }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button:hover {
+      background: #0d8cff;
+      cursor: pointer;
+    }
+    ul#user-list li {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    #kika-img {
+      width: 120px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="kika-cat.png" alt="Kika the Cat" style="height:80px; border-radius:20px;" />
+    <img id="kika-img" src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.png" alt="Kika the Cute Cat" />
     <h1>Welcome to KikaBits</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ai-tools">AI Tools</a></li>
+        <li><a href="#upload-photo">Photo</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section id="home">
@@ -57,19 +89,113 @@
     <p>KikaBits is a new cryptocurrency built on the Solana blockchain.</p>
   </section>
 
-  <section id="token-info">
-    <h2>KikaBits Token</h2>
-    <p>Official SPL Token Address:</p>
-    <code>EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</code>
-    <p>
-      <a href="https://solscan.io/token/EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump" target="_blank">
-        View on Solscan
-      </a>
-    </p>
+  <section id="wallet" style="display: none;">
+    <h2>Wallet</h2>
+    <button id="connect-wallet">Connect Wallet</button>
+  </section>
+
+  <section id="auth-section">
+    <h2>Login / Signup</h2>
+    <input type="email" id="auth-email" placeholder="Email" />
+    <input type="password" id="auth-password" placeholder="Password" />
+    <button id="login-button">Login</button>
+    <button id="signup-button">Sign Up</button>
+    <p id="auth-message"></p>
+  </section>
+
+  <section id="user-info" style="display:none;">
+    <p>Welcome, <span id="user-email"></span>!</p>
+    <button id="logout-button">Logout</button>
+  </section>
+
+  <section id="ai-tools">
+    <h2>Create Your Own AI Tool</h2>
+    <form id="tool-form">
+      <input type="text" id="tool-name" placeholder="Tool Name" required />
+      <textarea id="tool-description" placeholder="Description" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="tool-message"></p>
+  </section>
+
+  <section id="upload-photo">
+    <h2>Share a Photo</h2>
+    <input type="file" id="photo-upload" accept="image/*" />
+    <button id="upload-button">Upload Photo</button>
+    <div id="photo-display"></div>
+  </section>
+
+  <section id="users">
+    <h2>Community Users</h2>
+    <ul id="user-list"><li>Yükleniyor...</li></ul>
   </section>
 
   <footer>
     <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
+    <a href="https://x.com/EnesS28491677" target="_blank">
+      <button style="background:#1DA1F2; color:white; padding:10px 20px; border:none; border-radius:5px;">Visit My X Profile</button>
+    </a>
   </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    const supabase = createClient('https://ugzbsmmaxxklogjwlijrt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...')
+
+    async function init() {
+      const session = await supabase.auth.getSession()
+      if (session.data.session) showUserUI(session.data.session.user.email)
+
+      const { data: users } = await supabase.from('users').select('*')
+      const list = document.getElementById('user-list')
+      list.innerHTML = ''
+      users?.forEach((u) => {
+        const li = document.createElement('li')
+        li.textContent = u.username || u.email || 'Anon'
+        list.appendChild(li)
+      })
+    }
+    init()
+
+    document.getElementById('login-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Giriş başarılı'
+      if (data?.user) showUserUI(data.user.email)
+    }
+
+    document.getElementById('signup-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { error } = await supabase.auth.signUp({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Kayıt başarılı! Mailini kontrol et.'
+    }
+
+    document.getElementById('logout-button').onclick = async () => {
+      await supabase.auth.signOut()
+      document.getElementById('user-info').style.display = 'none'
+      document.getElementById('auth-section').style.display = 'block'
+    }
+
+    function showUserUI(email) {
+      document.getElementById('user-email').textContent = email
+      document.getElementById('user-info').style.display = 'block'
+      document.getElementById('auth-section').style.display = 'none'
+    }
+
+    document.getElementById('tool-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('Giriş yapmalısın!')
+
+      const name = document.getElementById('tool-name').value
+      const description = document.getElementById('tool-description').value
+      const { error } = await supabase.from('ai_tools').insert({ name, description, user_id: user.id })
+
+      document.getElementById('tool-message').textContent = error?.message || 'AI aracı başarıyla eklendi!'
+      if (!error) document.getElementById('tool-form').reset()
+    })
+  </script>
 </body>
 </html>
