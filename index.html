@@ -1,265 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KikaBits Crypto</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KikaBits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(-45deg, #0b0c10, #1f1f2e, #0b0c10, #1f1f2e);
-      background-size: 400% 400%;
-      animation: oceanFlow 15s ease infinite;
-      color: #e0e0ff;
       margin: 0;
-      padding: 0;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #120C1C;
+      color: #fff;
+      scroll-behavior: smooth;
     }
-    header, footer {
-      background: #1c1c2e;
-      color: #a18fff;
+
+    header {
+      background: linear-gradient(to right, #8e44ad, #2980b9);
+      padding: 2rem;
       text-align: center;
-      padding: 15px;
     }
-    nav ul {
-      list-style: none;
-      padding: 0;
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
     }
-    nav ul li {
-      display: inline-block;
-      margin: 0 15px;
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background-color: #1e1530;
+      flex-wrap: wrap;
     }
-    nav ul li a {
-      color: #8affc1;
-      background: #2a2a3d;
-      padding: 8px 12px;
-      border-radius: 20px;
+
+    nav a {
+      color: #a78bfa;
       text-decoration: none;
-      transition: 0.3s;
-      border: 1px solid #8affc1;
+      font-weight: bold;
+      transition: color 0.3s;
     }
-    nav ul li a:hover {
-      background: #8affc1;
-      color: #0b0c10;
+
+    nav a:hover {
+      color: #ffffff;
     }
+
     section {
-      padding: 20px;
-      background: #2a2a3d;
-      border-radius: 15px;
-      margin: 10px;
-      box-shadow: 0 0 10px rgba(129, 245, 186, 0.1);
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
     }
-    input, textarea {
+
+    section h2 {
+      color: #c084fc;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background-color: #1a1a2e;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(168, 139, 250, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .kika-img {
+      max-width: 100%;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input, textarea, button {
       width: 100%;
-      padding: 10px;
-      margin: 5px 0 15px;
-      border-radius: 5px;
-      border: 1px solid #444;
-      background-color: #1a1a28;
+      margin: 0.5rem 0;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    input, textarea {
+      background-color: #2f2f4f;
       color: #fff;
     }
+
     button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #a18fff;
-      color: #0b0c10;
-      font-weight: bold;
-    }
-    button:hover {
-      background: #8affc1;
+      background: linear-gradient(to right, #a78bfa, #60a5fa);
+      color: #fff;
       cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    ul#user-list li {
-      background: #1a1a28;
-      border: 1px solid #555;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 8px;
+
+    button:hover {
+      opacity: 0.9;
     }
-    #kika-img {
-      width: 120px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin-bottom: 10px;
+
+    .price-box {
+      font-size: 1.5rem;
+      color: #60a5fa;
+      margin-top: 1rem;
     }
-  @keyframes oceanFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    footer {
+      background-color: #1e1530;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
   <header>
-    <img id="kika-img" src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.png" alt="Kika the Cute Cat" />
-    <h1>Welcome to KikaBits</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#ai-tools">AI Tools</a></li>
-        <li><a href="#upload-photo">Photo</a></li>
-      </ul>
-    </nav>
+    <h1>Kika the Cute Cat</h1>
   </header>
 
-  <section id="home">
-    <h2>About KikaBits</h2>
-    <p>KikaBits is a new cryptocurrency built on the Solana blockchain.</p>
-    <p><strong>Contract Address:</strong><br> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
-  </section>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#login">Login</a>
+    <a href="#tools">AI Tools</a>
+    <a href="#photo">Photo</a>
+    <a href="#community">Community</a>
+    <a href="#price">Live Price</a>
+  </nav>
 
-  <section id="stats">
-    <h2>KikaBits Stats</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
-        <strong>Current Price:</strong> <span id="token-price">$0.021</span>
-      </div>
-      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
-        <strong>Community Members:</strong> <span id="user-count">0</span>
-      </div>
-      <div style="flex: 1; background:#1a1a28; padding:15px; border-radius:10px;">
-        <strong>Total AI Tools:</strong> <span id="tool-count">0</span>
-      </div>
+  <section id="about">
+    <div class="card">
+      <h2>Meet Kika</h2>
+      <img src="kika-outfit1.png" alt="Kika the Cat" class="kika-img">
+      <p>KikaBits is a fun new cryptocurrency on the Solana blockchain, powered by community energy and Kika's charm!</p>
+      <p><strong>Contract Address:</strong><br>EzmnnoqcdiPi543K9HjYN5sdZF3xyF683kjuwuhNGpmp</p>
     </div>
   </section>
 
-  <section id="wallet" style="display: none;">
-    <h2>Wallet</h2>
-    <button id="connect-wallet">Connect Wallet</button>
+  <section id="login">
+    <div class="card">
+      <h2>Login / Sign Up</h2>
+      <img src="kika-outfit2.png" alt="Kika with hat" class="kika-img">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button>Login</button>
+      <button>Sign Up</button>
+    </div>
   </section>
 
-  <section id="auth-section">
-    <h2>Login / Sign Up</h2>
-    <input type="email" id="auth-email" placeholder="Email" />
-    <input type="password" id="auth-password" placeholder="Password" />
-    <button id="login-button">Login</button>
-    <button id="signup-button">Sign Up</button>
-    <p id="auth-message"></p>
+  <section id="tools">
+    <div class="card">
+      <h2>Create Your Own AI Tool</h2>
+      <img src="kika-outfit3.png" alt="Kika with glasses" class="kika-img">
+      <input type="text" placeholder="Tool Name">
+      <textarea placeholder="Description"></textarea>
+      <button>Submit</button>
+    </div>
   </section>
 
-  <section id="user-info" style="display:none;">
-    <p>Welcome, <span id="user-email"></span>!</p>
-    <button id="logout-button">Logout</button>
+  <section id="photo">
+    <div class="card">
+      <h2>Share a Photo</h2>
+      <img src="kika-outfit4.png" alt="Kika with camera" class="kika-img">
+      <input type="file">
+      <button>Upload Photo</button>
+    </div>
   </section>
 
-  <section id="ai-tools">
-    <h2>Create Your Own AI Tool</h2>
-    <form id="tool-form">
-      <input type="text" id="tool-name" placeholder="Tool Name" required />
-      <textarea id="tool-description" placeholder="Description" required></textarea>
-      <button type="submit">Submit</button>
-    </form>
-    <p id="tool-message"></p>
+  <section id="community">
+    <div class="card">
+      <h2>Community Users</h2>
+      <img src="kika-outfit5.png" alt="Kika with friends" class="kika-img">
+      <p>Coming soon: Explore the coolest KikaBits users in the galaxy!</p>
+    </div>
   </section>
 
-  <section id="upload-photo">
-    <h2>Share a Photo</h2>
-    <input type="file" id="photo-upload" accept="image/*" />
-    <button id="upload-button">Upload Photo</button>
-    <div id="photo-display"></div>
-  </section>
-
-  <section id="users">
-    <h2>Community Users</h2>
-    <ul id="user-list"><li>Loading...</li></ul>
-  </section>
-
-  <section id="social">
-    <h2>Join the KikaBits Community</h2>
-    <div style="display: flex; gap: 15px;">
-      <a href="https://x.com/EnesS28491677" target="_blank"><button>X</button></a>
-      <a href="https://t.me/kikabits" target="_blank"><button>Telegram</button></a>
-      <a href="https://discord.com/invite/kikabits" target="_blank"><button>Discord</button></a>
+  <section id="price">
+    <div class="card">
+      <h2>KikaBits Live Price</h2>
+      <p>This is the current market price of KikaBits (updated in real time):</p>
+      <div class="price-box" id="priceDisplay">Loading price...</div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
-    <a href="https://x.com/EnesS28491677" target="_blank">
-      <button>Visit My X Profile</button>
-    </a>
+    <p>&copy; 2025 KikaBits. All rights reserved. Made with love by Kika.</p>
   </footer>
 
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-    const supabase = createClient('https://ugzbsmmaxxklogjwlijrt.supabase.co', 'YOUR_ANON_KEY')
-
-    async function init() {
-      const session = await supabase.auth.getSession()
-      if (session.data.session) showUserUI(session.data.session.user.email)
-
-      const { data: users } = await supabase.from('users').select('*')
-      const list = document.getElementById('user-list')
-      list.innerHTML = ''
-      users?.forEach((u) => {
-        const li = document.createElement('li')
-        li.textContent = u.username || u.email || 'Anon'
-        list.appendChild(li)
-      })
-      document.getElementById('user-count').textContent = users.length
-    }
-    init()
-
-    setInterval(() => {
-      const basePrice = 0.021;
-      const fluctuation = (Math.random() - 0.5) * 0.002;
-      const price = (basePrice + fluctuation).toFixed(4);
-      document.getElementById('token-price').textContent = `$${price}`;
-    }, 5000);
-
-    async function countAITools() {
-      const { count } = await supabase
-        .from('ai_tools')
-        .select('*', { count: 'exact', head: true });
-      document.getElementById('tool-count').textContent = count ?? 0;
-    }
-    countAITools();
-
-    document.getElementById('login-button').onclick = async () => {
-      const email = document.getElementById('auth-email').value
-      const password = document.getElementById('auth-password').value
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-      document.getElementById('auth-message').textContent = error?.message || 'Login successful'
-      if (data?.user) showUserUI(data.user.email)
+  <script>
+    async function fetchPrice() {
+      try {
+        // Bu URL'i kendi backend API'n ya da gerçek fiyat verisi sağlayan bir kaynakla değiştir
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+        const data = await response.json();
+        const price = data.bitcoin.usd;
+        document.getElementById('priceDisplay').textContent = `$${price.toLocaleString()}`;
+      } catch (error) {
+        document.getElementById('priceDisplay').textContent = 'Unable to load price.';
+      }
     }
 
-    document.getElementById('signup-button').onclick = async () => {
-      const email = document.getElementById('auth-email').value
-      const password = document.getElementById('auth-password').value
-      const { error } = await supabase.auth.signUp({ email, password })
-      document.getElementById('auth-message').textContent = error?.message || 'Sign up successful! Please check your email.'
-    }
-
-    document.getElementById('logout-button').onclick = async () => {
-      await supabase.auth.signOut()
-      document.getElementById('user-info').style.display = 'none'
-      document.getElementById('auth-section').style.display = 'block'
-    }
-
-    function showUserUI(email) {
-      document.getElementById('user-email').textContent = email
-      document.getElementById('user-info').style.display = 'block'
-      document.getElementById('auth-section').style.display = 'none'
-    }
-
-    document.getElementById('tool-form').addEventListener('submit', async (e) => {
-      e.preventDefault()
-      const session = await supabase.auth.getSession()
-      const user = session.data.session?.user
-      if (!user) return alert('You must be logged in!')
-
-      const name = document.getElementById('tool-name').value
-      const description = document.getElementById('tool-description').value
-      const { error } = await supabase.from('ai_tools').insert({ name, description, user_id: user.id })
-
-      document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
-      if (!error) document.getElementById('tool-form').reset()
-      countAITools();
-    })
+    fetchPrice();
+    setInterval(fetchPrice, 10000); // 10 saniyede bir güncelle
   </script>
 </body>
 </html>
