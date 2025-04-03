@@ -1,205 +1,67 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KikaBits</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: #120C1C;
-      color: #fff;
-      scroll-behavior: smooth;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KikaBits Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a1b9a, #0d47a1); /* Gradient background */
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+        }
 
-    header {
-      background: linear-gradient(to right, #8e44ad, #2980b9);
-      padding: 2rem;
-      text-align: center;
-    }
+        .header {
+            text-align: center;
+            padding: 50px;
+        }
 
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
+        .header h1 {
+            font-size: 3rem;
+        }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      background-color: #1e1530;
-      flex-wrap: wrap;
-    }
+        .content {
+            text-align: center;
+        }
 
-    nav a {
-      color: #a78bfa;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+        .kika-img {
+            width: 150px;
+            height: auto;
+            margin: 20px;
+            transition: transform 0.3s ease;
+        }
 
-    nav a:hover {
-      color: #ffffff;
-    }
+        .kika-img:hover {
+            transform: scale(1.1);
+        }
 
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
+        button {
+            padding: 10px 20px;
+            background-color: #0d47a1;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
 
-    section h2 {
-      color: #c084fc;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .card {
-      background-color: #1a1a2e;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(168, 139, 250, 0.2);
-      margin-bottom: 2rem;
-    }
-
-    .kika-img {
-      max-width: 100%;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    input, textarea, button {
-      width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-    }
-
-    input, textarea {
-      background-color: #2f2f4f;
-      color: #fff;
-    }
-
-    button {
-      background: linear-gradient(to right, #a78bfa, #60a5fa);
-      color: #fff;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    .price-box {
-      font-size: 1.5rem;
-      color: #60a5fa;
-      margin-top: 1rem;
-    }
-
-    footer {
-      background-color: #1e1530;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
+        button:hover {
+            background-color: #6a1b9a;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Kika the Cute Cat</h1>
-  </header>
-
-  <nav>
-    <a href="#about">About</a>
-    <a href="#login">Login</a>
-    <a href="#tools">AI Tools</a>
-    <a href="#photo">Photo</a>
-    <a href="#community">Community</a>
-    <a href="#price">Live Price</a>
-  </nav>
-
-  <section id="about">
-    <div class="card">
-      <h2>Meet Kika</h2>
-      <img src="kika-outfit1.png" alt="Kika the Cat" class="kika-img">
-      <p>KikaBits is a fun new cryptocurrency on the Solana blockchain, powered by community energy and Kika's charm!</p>
-      <p><strong>Contract Address:</strong><br>EzmnnoqcdiPi543K9HjYN5sdZF3xyF683kjuwuhNGpmp</p>
+    <div class="header">
+        <h1>Welcome to KikaBits</h1>
     </div>
-  </section>
-
-  <section id="login">
-    <div class="card">
-      <h2>Login / Sign Up</h2>
-      <img src="kika-outfit2.png" alt="Kika with hat" class="kika-img">
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <button>Login</button>
-      <button>Sign Up</button>
+    <div class="content">
+        <img src="images/kika_1.png" alt="Kika the Cat" class="kika-img">
+        <img src="images/kika_2.png" alt="Kika the Cat" class="kika-img">
+        <img src="images/kika_3.png" alt="Kika the Cat" class="kika-img">
+        <button>Join Us Now</button>
     </div>
-  </section>
-
-  <section id="tools">
-    <div class="card">
-      <h2>Create Your Own AI Tool</h2>
-      <img src="kika-outfit3.png" alt="Kika with glasses" class="kika-img">
-      <input type="text" placeholder="Tool Name">
-      <textarea placeholder="Description"></textarea>
-      <button>Submit</button>
-    </div>
-  </section>
-
-  <section id="photo">
-    <div class="card">
-      <h2>Share a Photo</h2>
-      <img src="kika-outfit4.png" alt="Kika with camera" class="kika-img">
-      <input type="file">
-      <button>Upload Photo</button>
-    </div>
-  </section>
-
-  <section id="community">
-    <div class="card">
-      <h2>Community Users</h2>
-      <img src="kika-outfit5.png" alt="Kika with friends" class="kika-img">
-      <p>Coming soon: Explore the coolest KikaBits users in the galaxy!</p>
-    </div>
-  </section>
-
-  <section id="price">
-    <div class="card">
-      <h2>KikaBits Live Price</h2>
-      <p>This is the current market price of KikaBits (updated in real time):</p>
-      <div class="price-box" id="priceDisplay">Loading price...</div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 KikaBits. All rights reserved. Made with love by Kika.</p>
-  </footer>
-
-  <script>
-    async function fetchPrice() {
-      try {
-        // Bu URL'i kendi backend API'n ya da gerçek fiyat verisi sağlayan bir kaynakla değiştir
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-        const data = await response.json();
-        const price = data.bitcoin.usd;
-        document.getElementById('priceDisplay').textContent = `$${price.toLocaleString()}`;
-      } catch (error) {
-        document.getElementById('priceDisplay').textContent = 'Unable to load price.';
-      }
-    }
-
-    fetchPrice();
-    setInterval(fetchPrice, 10000); // 10 saniyede bir güncelle
-  </script>
 </body>
 </html>
