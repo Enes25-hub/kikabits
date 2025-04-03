@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,17 +6,22 @@
   <title>KikaBits Crypto</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(to right, #fff0f5, #e0ffff, #ffe4e1);
       color: #333;
       margin: 0;
       padding: 0;
+      font-size: 18px;
     }
     header, footer {
       background: #ff69b4;
       color: white;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
+    }
+    h1, h2, p {
+      font-size: 1.6em;
+      line-height: 1.4;
     }
     nav ul {
       list-style: none;
@@ -29,10 +34,11 @@
     nav ul li a {
       color: white;
       background: #ffb6c1;
-      padding: 8px 12px;
+      padding: 12px 18px;
       border-radius: 20px;
       text-decoration: none;
       transition: 0.3s;
+      font-size: 1.2em;
     }
     nav ul li a:hover {
       background: #ff69b4;
@@ -46,28 +52,36 @@
     }
     input, textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 5px 0 15px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background: #0d8cff;
-      cursor: pointer;
-    }
-    ul#user-list li {
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 8px;
     }
     #kika-img {
-      width: 120px;
+      width: 150px;
       height: auto;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       margin-bottom: 10px;
+    }
+    #wallet-section button {
+      background-color: #ff69b4;
+      color: white;
+    }
+    #wallet-section button:hover {
+      background-color: #ff4d88;
     }
   </style>
 </head>
@@ -80,6 +94,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#ai-tools">AI Tools</a></li>
         <li><a href="#upload-photo">Photo</a></li>
+        <li><a href="#wallet">Wallet</a></li>
       </ul>
     </nav>
   </header>
@@ -90,9 +105,9 @@
     <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
   </section>
 
-  <section id="wallet" style="display: none;">
+  <section id="wallet" style="display: none;" id="wallet-section">
     <h2>Wallet</h2>
-    <button id="connect-wallet">Connect Wallet</button>
+    <button id="connect-wallet">Connect Wallet with Phantom</button>
   </section>
 
   <section id="auth-section">
