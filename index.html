@@ -5,95 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KikaBits Crypto</title>
   <style>
-    html, body {
-      height: 100%; /* Sayfa yüksekliğini %100 yaparak kaymayı engeller */
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* Sayfa kaymasını engeller */
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to right, #4b79a1, #283e51); /* Koyu mavi geçiş */
-      color: white;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #0b0c10, #1f1f2e);
+      color: #e0e0ff;
+      margin: 0;
+      padding: 0;
     }
-
     header, footer {
-      background: #ff69b4;
-      color: white;
+      background: #1c1c2e;
+      color: #a18fff;
       text-align: center;
       padding: 20px;
+      box-shadow: 0 4px 10px rgba(161, 143, 255, 0.2);
     }
-
     nav ul {
       list-style: none;
       padding: 0;
+      margin-top: 10px;
     }
-
     nav ul li {
       display: inline-block;
-      margin: 0 15px;
+      margin: 0 10px;
     }
-
     nav ul li a {
-      color: white;
-      background: #ffb6c1;
-      padding: 12px 18px;
-      border-radius: 25px;
+      color: #8affc1;
+      background: #2a2a3d;
+      padding: 8px 14px;
+      border-radius: 30px;
       text-decoration: none;
-      font-size: 1.2em;
       transition: 0.3s;
+      border: 1px solid #8affc1;
     }
-
     nav ul li a:hover {
-      background: #ff69b4;
+      background: #8affc1;
+      color: #0b0c10;
     }
-
     section {
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 15px;
-      margin: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      background: #2a2a3d;
+      border-radius: 12px;
+      margin: 15px;
+      box-shadow: 0 0 12px rgba(129, 245, 186, 0.1);
     }
-
     input, textarea {
       width: 100%;
       padding: 12px;
-      margin: 5px 0 15px;
+      margin-top: 10px;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid #444;
+      background-color: #1a1a28;
+      color: #fff;
     }
-
     button {
-      background-color: #ff69b4;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
+      padding: 10px 20px;
       border: none;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      border-radius: 8px;
+      background: #a18fff;
+      color: #0b0c10;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-
     button:hover {
-      background-color: #ff4d88;
+      background: #8affc1;
     }
-
     ul#user-list li {
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 12px;
-      border-radius: 10px;
+      background: #1a1a28;
+      border: 1px solid #555;
+      padding: 10px;
+      border-radius: 8px;
       margin-bottom: 10px;
     }
-
     #kika-img {
-      width: 150px;
-      height: auto;
+      width: 100px;
       border-radius: 50%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      border: 2px solid #8affc1;
     }
   </style>
 </head>
@@ -160,7 +149,7 @@
   <footer>
     <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
     <a href="https://x.com/EnesS28491677" target="_blank">
-      <button style="background:#1DA1F2; color:white; padding:10px 20px; border:none; border-radius:5px;">Visit My X Profile</button>
+      <button>Visit My X Profile</button>
     </a>
   </footer>
 
@@ -170,7 +159,10 @@
 
     async function init() {
       const session = await supabase.auth.getSession()
-      if (session.data.session) showUserUI(session.data.session.user.email)
+      if (session.data.session) {
+        showUserUI(session.data.session.user.email)
+        document.getElementById('wallet').style.display = 'block'
+      }
 
       const { data: users } = await supabase.from('users').select('*')
       const list = document.getElementById('user-list')
