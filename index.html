@@ -5,36 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KikaBits Crypto</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #0b0c10, #1f1f2e);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(-45deg, #0b0c10, #1f1f2e, #0b0c10, #1f1f2e);
+      background-size: 400% 400%;
+      animation: oceanFlow 15s ease infinite;
       color: #e0e0ff;
       margin: 0;
       padding: 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     header, footer {
       background: #1c1c2e;
       color: #a18fff;
       text-align: center;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(161, 143, 255, 0.2);
+      padding: 15px;
     }
     nav ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
     }
     nav ul li {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 15px;
     }
     nav ul li a {
       color: #8affc1;
       background: #2a2a3d;
-      padding: 8px 14px;
-      border-radius: 30px;
+      padding: 8px 12px;
+      border-radius: 20px;
       text-decoration: none;
       transition: 0.3s;
       border: 1px solid #8affc1;
@@ -44,17 +44,17 @@
       color: #0b0c10;
     }
     section {
-      padding: 25px;
+      padding: 20px;
       background: #2a2a3d;
-      border-radius: 12px;
-      margin: 15px;
-      box-shadow: 0 0 12px rgba(129, 245, 186, 0.1);
+      border-radius: 15px;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(129, 245, 186, 0.1);
     }
     input, textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 8px;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border-radius: 5px;
       border: 1px solid #444;
       background-color: #1a1a28;
       color: #fff;
@@ -66,23 +66,29 @@
       background: #a18fff;
       color: #0b0c10;
       font-weight: bold;
-      transition: background 0.3s;
     }
     button:hover {
       background: #8affc1;
+      cursor: pointer;
     }
     ul#user-list li {
       background: #1a1a28;
       border: 1px solid #555;
       padding: 10px;
       border-radius: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     #kika-img {
-      width: 100px;
-      border-radius: 50%;
+      width: 120px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       margin-bottom: 10px;
-      border: 2px solid #8affc1;
+    }
+  @keyframes oceanFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
@@ -102,7 +108,7 @@
   <section id="home">
     <h2>About KikaBits</h2>
     <p>KikaBits is a new cryptocurrency built on the Solana blockchain.</p>
-    <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
+    <p><strong>Contract Address:</strong><br> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
   </section>
 
   <section id="wallet" style="display: none;">
@@ -159,10 +165,7 @@
 
     async function init() {
       const session = await supabase.auth.getSession()
-      if (session.data.session) {
-        showUserUI(session.data.session.user.email)
-        document.getElementById('wallet').style.display = 'block'
-      }
+      if (session.data.session) showUserUI(session.data.session.user.email)
 
       const { data: users } = await supabase.from('users').select('*')
       const list = document.getElementById('user-list')
