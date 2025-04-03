@@ -5,83 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KikaBits Crypto</title>
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to right, #fff0f5, #e0ffff, #ffe4e1);
-      color: #333;
+    html, body {
+      height: 100%; /* Sayfa yüksekliğini %100 yaparak kaymayı engeller */
       margin: 0;
       padding: 0;
-      font-size: 20px;
+      overflow: hidden; /* Sayfa kaymasını engeller */
     }
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #4b79a1, #283e51); /* Koyu mavi geçiş */
+      color: white;
+    }
+
     header, footer {
       background: #ff69b4;
       color: white;
       text-align: center;
       padding: 20px;
     }
-    h1, h2, p {
-      font-size: 1.8em;
-      line-height: 1.4;
-    }
+
     nav ul {
       list-style: none;
       padding: 0;
     }
+
     nav ul li {
       display: inline-block;
       margin: 0 15px;
     }
+
     nav ul li a {
       color: white;
       background: #ffb6c1;
       padding: 12px 18px;
-      border-radius: 20px;
+      border-radius: 25px;
       text-decoration: none;
+      font-size: 1.2em;
       transition: 0.3s;
-      font-size: 1.4em;
     }
+
     nav ul li a:hover {
       background: #ff69b4;
     }
+
     section {
       padding: 20px;
-      background: white;
+      background: #ffffff;
       border-radius: 15px;
-      margin: 10px;
-      box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+      margin: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     input, textarea {
       width: 100%;
       padding: 12px;
       margin: 5px 0 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1.2em;
-    }
-    button {
-      padding: 12px 20px;
-      font-size: 1.4em;
-      cursor: pointer;
-      border: none;
       border-radius: 8px;
-      transition: background-color 0.3s ease;
+      border: 1px solid #ddd;
     }
-    button:hover {
-      background: #0d8cff;
-    }
-    #kika-img {
-      width: 180px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin-bottom: 10px;
-    }
-    #wallet-section button {
+
+    button {
       background-color: #ff69b4;
       color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-    #wallet-section button:hover {
+
+    button:hover {
       background-color: #ff4d88;
+    }
+
+    ul#user-list li {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    #kika-img {
+      width: 150px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -94,7 +106,6 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#ai-tools">AI Tools</a></li>
         <li><a href="#upload-photo">Photo</a></li>
-        <li><a href="#wallet">Wallet</a></li>
       </ul>
     </nav>
   </header>
@@ -105,9 +116,9 @@
     <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
   </section>
 
-  <section id="wallet" style="display: none;" id="wallet-section">
+  <section id="wallet" style="display: none;">
     <h2>Wallet</h2>
-    <button id="connect-wallet">Connect Wallet with Phantom</button>
+    <button id="connect-wallet">Connect Wallet</button>
   </section>
 
   <section id="auth-section">
@@ -212,22 +223,6 @@
       document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
       if (!error) document.getElementById('tool-form').reset()
     })
-
-    // Phantom Cüzdan Bağlantısı
-    document.getElementById('connect-wallet').addEventListener('click', () => {
-      if (window.solana && window.solana.isPhantom) {
-        window.solana.request({ method: 'connect' })
-          .then(() => {
-            alert('Phantom cüzdanınız bağlandı!');
-          })
-          .catch((error) => {
-            console.error('Cüzdan bağlantısı hatası:', error);
-            alert('Cüzdan bağlanırken bir hata oluştu.');
-          });
-      } else {
-        alert('Phantom cüzdanı yüklü değil.');
-      }
-    });
   </script>
 </body>
 </html>
