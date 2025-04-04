@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KikaBits</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>KikaBits AI Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #57c8ff;
-      --secondary: #a0e7ff;
-      --accent: #0097b2;
-      --text: #222;
-      --background: #e6f7ff;
-      --card: #ffffff;
+      --primary: #00e0ff;
+      --background: #000000;
+      --card: #111111;
+      --text: #ffffff;
+      --accent: #00b7ff;
     }
 
     * {
@@ -22,706 +21,112 @@
     }
 
     body {
-      font-family: 'Quicksand', sans-serif;
       background-color: var(--background);
       color: var(--text);
-      padding-bottom: 50px;
-    }
-
-    header, footer {
-      background: var(--primary);
-      color: white;
-      text-align: center;
+      font-family: 'Quicksand', sans-serif;
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
 
-    header img {
-      width: 100px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-bottom: 10px;
+    header {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      background: var(--accent);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 25px;
-      transition: background 0.3s;
-    }
-
-    nav ul li a:hover {
-      background: #007f99;
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
     }
 
     section {
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 600px;
+      margin: auto;
       background: var(--card);
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
     }
 
-    h1, h2 {
-      margin-bottom: 10px;
+    h2 {
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-size: 1.8rem;
     }
 
     input, textarea, button {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+      margin-top: 10px;
+      border-radius: 8px;
       font-size: 1rem;
-      font-family: 'Quicksand', sans-serif;
+      border: none;
+    }
+
+    input, textarea {
+      background: #1a1a1a;
+      color: var(--text);
+      border: 1px solid #333;
     }
 
     button {
-      background: var(--secondary);
-      color: #000;
-      border: none;
+      background-color: var(--accent);
+      color: black;
       font-weight: bold;
-      transition: background 0.3s;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: #7edcff;
+      background-color: #0094cc;
     }
 
-    #user-list li, #message-list li {
-      background: #f0fbff;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #dde;
-    }
-
-    #photo-display img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin-top: 15px;
-    }
-
-    footer a button {
-      background: #1DA1F2;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
+    #tool-message {
       margin-top: 10px;
+      color: #4fffa5;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://cdn.pixabay.com/photo/2016/03/27/22/16/cat-1285634_1280.png" alt="Kika Cat">
-    <h1>Welcome to the KikaBits Community</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#ai-tools">AI Tools</a></li>
-        <li><a href="#upload-photo">Photo</a></li>
-      </ul>
-    </nav>
+    <h1>KikaBits AI Tools</h1>
   </header>
-  <section id="home">
-    <h2>What is KikaBits?</h2>
-    <p>KikaBits is a playful and innovative cryptocurrency project built on the Solana blockchain. It brings community, fun, and technology together.</p>
-    <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
-  </section>
 
-  <section id="auth-section">
-    <h2>Login / Sign Up</h2>
-    <input type="email" id="auth-email" placeholder="Email" />
-    <input type="password" id="auth-password" placeholder="Password" />
-    <div class="button-row">
-      <button id="login-button">Log In</button>
-      <button id="signup-button">Sign Up</button>
-    </div>
-    <p id="auth-message"></p>
-  </section>
-
-  <section id="user-info" style="display:none;">
-    <p>Welcome, <span id="user-email"></span>!</p>
-    <button id="logout-button">Log Out</button>
-  </section>
-
-  <section id="ai-tools">
+  <section>
     <h2>Create Your AI Tool</h2>
     <form id="tool-form">
       <input type="text" id="tool-name" placeholder="Tool Name" required />
-      <textarea id="tool-description" placeholder="Description" required></textarea>
-      <button type="submit">Submit</button>
+      <textarea id="tool-description" placeholder="Tool Description" required></textarea>
+      <button type="submit">Submit Tool</button>
     </form>
     <p id="tool-message"></p>
   </section>
-
-  <section id="upload-photo">
-    <h2>Share a Photo</h2>
-    <input type="file" id="photo-upload" accept="image/*" />
-    <button id="upload-button">Upload</button>
-    <div id="photo-display"></div>
-  </section>
-
-  <section id="users">
-    <h2>Community Members</h2>
-    <ul id="user-list"><li>Loading...</li></ul>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 KikaBits. Designed by Scam Hunter</p>
-    <a href="https://x.com/EnesS28491677" target="_blank">
-      <button>Visit My X Profile</button>
-    </a>
-  </footer>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
+    // Supabase projenin kendi URL ve anon key değerini buraya koymalısın:
     const supabase = createClient(
-      'https://ugzbsmmaxxklogjwlijrt.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+      'https://YOUR-SUPABASE-URL.supabase.co',
+      'YOUR-ANON-KEY'
     )
 
-    async function init() {
-      const session = await supabase.auth.getSession()
-      if (session.data.session) showUserUI(session.data.session.user.email)
-
-      const { data: users } = await supabase.from('users').select('*')
-      const list = document.getElementById('user-list')
-      list.innerHTML = ''
-      users?.forEach((u) => {
-        const li = document.createElement('li')
-        li.textContent = u.username || u.email || 'Anonymous'
-        list.appendChild(li)
-      })
-    }
-
-    init()
-
-    document.getElementById('login-button').onclick = async () => {
-      const email = document.getElementById('auth-email').value
-      const password = document.getElementById('auth-password').value
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-      document.getElementById('auth-message').textContent = error?.message || 'Login successful'
-      if (data?.user) showUserUI(data.user.email)
-    }
-
-    document.getElementById('signup-button').onclick = async () => {
-      const email = document.getElementById('auth-email').value
-      const password = document.getElementById('auth-password').value
-      const { error } = await supabase.auth.signUp({ email, password })
-      document.getElementById('auth-message').textContent = error?.message || 'Sign up successful! Please check your email.'
-    }
-
-    document.getElementById('logout-button').onclick = async () => {
-      await supabase.auth.signOut()
-      document.getElementById('user-info').style.display = 'none'
-      document.getElementById('auth-section').style.display = 'block'
-    }
-
-    function showUserUI(email) {
-      document.getElementById('user-email').textContent = email
-      document.getElementById('user-info').style.display = 'block'
-      document.getElementById('auth-section').style.display = 'none'
-    }
     document.getElementById('tool-form').addEventListener('submit', async (e) => {
       e.preventDefault()
-      const session = await supabase.auth.getSession()
-      const user = session.data.session?.user
-      if (!user) return alert('You must be logged in!')
+      
+      const name = document.getElementById('tool-name').value.trim()
+      const description = document.getElementById('tool-description').value.trim()
 
-      const name = document.getElementById('tool-name').value
-      const description = document.getElementById('tool-description').value
-      const { error } = await supabase.from('ai_tools').insert({ name, description, user_id: user.id })
+      if (!name || !description) return
 
-      document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
-      if (!error) document.getElementById('tool-form').reset()
-    })
+      const { error } = await supabase.from('ai_tools').insert({ name, description })
 
-    document.getElementById('upload-button').addEventListener('click', async () => {
-      const fileInput = document.getElementById('photo-upload')
-      const file = fileInput.files[0]
-      if (!file) return alert('Please choose a file!')
-
-      const session = await supabase.auth.getSession()
-      const user = session.data.session?.user
-      if (!user) return alert('You must be logged in!')
-
-      const filePath = `${user.id}/${Date.now()}_${file.name}`
-      const { error: uploadError } = await supabase.storage.from('photos').upload(filePath, file)
-      if (uploadError) return alert('Upload failed: ' + uploadError.message)
-
-      const { data: urlData } = supabase.storage.from('photos').getPublicUrl(filePath)
-      const displayDiv = document.getElementById('photo-display')
-      const img = document.createElement('img')
-      img.src = urlData.publicUrl
-      displayDiv.innerHTML = ''
-      displayDiv.appendChild(img)
-    })
-
-    async function loadUsers() {
-      const { data: users } = await supabase.from('users').select('*')
-      const list = document.getElementById('user-list')
-      list.innerHTML = ''
-      users?.forEach((u) => {
-        const li = document.createElement('li')
-        li.textContent = u.username || u.email || 'Anonymous'
-        list.appendChild(li)
-      })
-    }
-
-    loadUsers()
-  </script>
-
-  <section id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <details>
-      <summary>What is KikaBits?</summary>
-      <p>KikaBits is a fun and community-driven cryptocurrency built on the Solana blockchain.</p>
-    </details>
-    <details>
-      <summary>How do I sign up?</summary>
-      <p>You can easily register through the "Login / Sign Up" section on the homepage.</p>
-    </details>
-    <details>
-      <summary>What is an AI tool?</summary>
-      <p>We provide a user-friendly platform where you can create your own AI-powered tools.</p>
-    </details>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form id="contact-form">
-      <input type="text" id="contact-name" placeholder="Your Name" required />
-      <input type="email" id="contact-email" placeholder="Your Email" required />
-      <textarea id="contact-message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-    <p id="contact-feedback"></p>
-  </section>
-
-  <style>
-    #faq details {
-      background: #f0fbff;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      border-left: 5px solid #57c8ff;
-    }
-
-    #faq summary {
-      font-weight: bold;
-      font-size: 1.1em;
-      cursor: pointer;
-    }
-
-    #contact-form {
-      max-width: 500px;
-      margin: auto;
-    }
-
-    #contact-form input, #contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-
-    #contact-form button {
-      background-color: #0097b2;
-      color: white;
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    #contact-form button:hover {
-      background-color: #007a8a;
-    }
-
-    #contact-feedback {
-      text-align: center;
-      margin-top: 10px;
-      color: green;
-    }
-  </style>
-  <script>
-    document.getElementById("contact-form").addEventListener("submit", function (e) {
-      e.preventDefault()
-      document.getElementById("contact-feedback").textContent = "Your message has been sent successfully. Thank you!"
-      this.reset()
-    })
-  </script>
-  <section id="kika-world" class="bg-white rounded-2xl shadow-lg p-6 mt-6">
-    <h2 class="text-2xl font-bold text-blue-600 mb-4">Kika's World</h2>
-    <p class="text-gray-700 mb-4">
-      Kika is not just a coin; it's a community, a dream, and your digital pet! Explore updates, stories, and cute visuals below.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <img src="https://cdn.pixabay.com/photo/2017/11/11/21/59/cat-2948404_1280.jpg" alt="Kika Playful" class="rounded-xl shadow-md">
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-blue-500 mb-2">What's Kika Doing?</h3>
-        <ul class="list-disc list-inside text-gray-600 space-y-2">
-          <li>Weekly community-voted mini challenges</li>
-          <li>AI-powered story generator</li>
-          <li>Exclusive NFT raffles for participants</li>
-          <li>Surprise events with free $KIKA</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="community-corner">
-    <h2>Community Corner</h2>
-    <form id="message-form">
-      <textarea id="message-text" placeholder="Write your message..." required></textarea>
-      <button type="submit">Send</button>
-    </form>
-
-    <div id="filter-controls">
-      <label for="filter-input">Filter by user:</label>
-      <input type="text" id="filter-input" placeholder="username..." />
-    </div>
-
-    <ul id="message-list">
-      <li>Loading...</li>
-    </ul>
-  </section>
-
-  <style>
-    #community-corner {
-      padding: 20px;
-      background: #f0faff;
-      border-radius: 12px;
-      box-shadow: 0 0 8px rgba(0, 151, 178, 0.2);
-      margin: 20px 10px;
-    }
-
-    #message-form textarea {
-      width: 100%;
-      height: 80px;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      resize: vertical;
-    }
-
-    #message-form button {
-      background: var(--accent);
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    #filter-controls {
-      margin-top: 15px;
-      margin-bottom: 10px;
-    }
-
-    #filter-input {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      width: 100%;
-    }
-
-    .message-meta {
-      font-size: 0.8em;
-      color: #888;
-      margin-bottom: 5px;
-    }
-  </style>
-  <script>
-    async function loadMessages() {
-      const { data: messages, error } = await supabase
-        .from('messages')
-        .select('id, content, created_at, user_email')
-        .order('created_at', { ascending: false })
-
-      const list = document.getElementById('message-list')
-      list.innerHTML = ''
-
+      const message = document.getElementById('tool-message')
       if (error) {
-        list.innerHTML = '<li>Messages could not be loaded.</li>'
-        return
-      }
-
-      for (const msg of messages) {
-        const { count } = await supabase
-          .from('likes')
-          .select('*', { count: 'exact', head: true })
-          .eq('message_id', msg.id)
-
-        const li = document.createElement('li')
-        li.innerHTML = `
-          <div class="message-meta">${msg.user_email} - ${new Date(msg.created_at).toLocaleString()}</div>
-          <div class="message-text">${msg.content}</div>
-          <div class="like-section">
-            <button class="like-btn" data-id="${msg.id}">Like</button>
-            <span class="like-count">${count}</span>
-          </div>
-        `
-        list.appendChild(li)
-      }
-
-      document.querySelectorAll('.like-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const session = await supabase.auth.getSession()
-          const user = session.data.session?.user
-          if (!user) return alert('You must be logged in.')
-
-          const messageId = btn.getAttribute('data-id')
-
-          const { data: existing } = await supabase
-            .from('likes')
-            .select('*')
-            .eq('message_id', messageId)
-            .eq('user_id', user.id)
-
-          if (existing?.length > 0) {
-            alert('You already liked this message.')
-            return
-          }
-
-          const { error } = await supabase.from('likes').insert({
-            message_id: messageId,
-            user_id: user.id
-          })
-
-          if (!error) loadMessages()
-        })
-      })
-    }
-
-    document.getElementById('message-form').addEventListener('submit', async (e) => {
-      e.preventDefault()
-
-      const textarea = document.getElementById('message-text')
-      const content = textarea.value.trim()
-      if (!content) return
-
-      const session = await supabase.auth.getSession()
-      const user = session.data.session?.user
-      if (!user) return alert('You must be logged in.')
-
-      const { error } = await supabase.from('messages').insert({
-        content,
-        user_email: user.email
-      })
-
-      if (error) {
-        alert('Failed to send message: ' + error.message)
+        message.textContent = 'Something went wrong: ' + error.message
       } else {
-        textarea.value = ''
-        loadMessages()
+        message.textContent = 'AI Tool successfully submitted!'
+        document.getElementById('tool-form').reset()
       }
     })
-
-    document.getElementById('filter-input').addEventListener('input', () => {
-      const keyword = document.getElementById('filter-input').value.toLowerCase()
-      const messages = document.querySelectorAll('#message-list li')
-
-      messages.forEach(msg => {
-        const email = msg.querySelector('.message-meta')?.textContent?.toLowerCase() || ''
-        msg.style.display = email.includes(keyword) ? 'block' : 'none'
-      })
-    })
-
-    loadMessages()
-  </script>
-  <div id="emoji-panel" style="display:none; margin-top:5px;"></div>
-  <button type="button" id="toggle-emoji">😀</button>
-
-  <script>
-    const emojiPanel = document.getElementById('emoji-panel')
-    const emojiBtn = document.getElementById('toggle-emoji')
-    const messageInput = document.getElementById('message-text')
-
-    const emojis = ['😀','😺','❤️','🔥','😂','😎','😻','🤖','🚀','🎉','💎','👀']
-
-    emojiBtn.addEventListener('click', () => {
-      emojiPanel.style.display = emojiPanel.style.display === 'none' ? 'block' : 'none'
-    })
-
-    emojiPanel.innerHTML = emojis.map(e => `<span style="font-size: 24px; cursor: pointer; margin: 5px;">${e}</span>`).join('')
-
-    emojiPanel.addEventListener('click', (e) => {
-      if (e.target.tagName === 'SPAN') {
-        messageInput.value += e.target.textContent
-      }
-    })
-  </script>
-
-  <section id="avatar-section" style="display:none;">
-    <h3>Upload Your Avatar</h3>
-    <input type="file" id="avatar-upload" accept="image/*" />
-    <button id="upload-avatar-button">Upload Avatar</button>
-  </section>
-
-  <script>
-    document.getElementById('upload-avatar-button').addEventListener('click', async () => {
-      const file = document.getElementById('avatar-upload').files[0]
-      if (!file) return alert('Please select a file')
-
-      const session = await supabase.auth.getSession()
-      const user = session.data.session?.user
-      if (!user) return alert('Not logged in')
-
-      const filePath = `avatars/${user.id}_${Date.now()}.png`
-
-      const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, {
-        upsert: true
-      })
-
-      if (uploadError) return alert('Upload failed: ' + uploadError.message)
-
-      const { data: urlData } = supabase.storage.from('avatars').getPublicUrl(filePath)
-      const avatarUrl = urlData.publicUrl
-
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({ avatar_url: avatarUrl })
-        .eq('id', user.id)
-
-      if (updateError) return alert('Error updating user: ' + updateError.message)
-      alert('Avatar uploaded successfully!')
-    })
-  </script>
-  <section id="filter-section">
-    <h3>Filter & Sort</h3>
-    <input type="text" id="search-input" placeholder="Search keyword..." />
-    <select id="sort-select">
-      <option value="newest">Newest</option>
-      <option value="likes">Most Liked</option>
-    </select>
-  </section>
-
-  <style>
-    #filter-section {
-      padding: 15px;
-      background: #f0f8ff;
-      border-radius: 10px;
-      margin: 20px 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    #filter-section input, #filter-section select {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      flex: 1;
-      min-width: 150px;
-    }
-
-    .like-btn {
-      background: transparent;
-      border: none;
-      color: #e25555;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 5px;
-    }
-
-    .msg {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.05);
-    }
-  </style>
-
-  <script>
-    async function renderMessages() {
-      const searchTerm = document.getElementById('search-input').value.toLowerCase()
-      const sortType = document.getElementById('sort-select').value
-
-      let { data: messages, error } = await supabase
-        .from('messages')
-        .select('*, users (username, avatar_url), likes(count)')
-        .order('created_at', { ascending: false })
-
-      if (error) return console.error(error)
-
-      if (searchTerm) {
-        messages = messages.filter(msg => msg.content.toLowerCase().includes(searchTerm))
-      }
-
-      if (sortType === 'likes') {
-        messages.sort((a, b) => b.likes.length - a.likes.length)
-      }
-
-      const container = document.getElementById('message-list')
-      container.innerHTML = ''
-
-      for (const msg of messages) {
-        const msgDiv = document.createElement('div')
-        msgDiv.classList.add('msg')
-        msgDiv.innerHTML = `
-          <div style="display:flex; align-items:center;">
-            <img src="${msg.users.avatar_url || 'https://via.placeholder.com/40'}"
-              style="width:40px; height:40px; border-radius:50%; margin-right:10px;">
-            <div>
-              <strong>${msg.users.username || msg.users.email}</strong><br/>
-              <span>${msg.content}</span><br/>
-              <button data-id="${msg.id}" class="like-btn">❤️ ${msg.likes.length}</button>
-            </div>
-          </div>
-        `
-        container.appendChild(msgDiv)
-      }
-
-      document.querySelectorAll('.like-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          const messageId = e.target.dataset.id
-          const session = await supabase.auth.getSession()
-          const user = session.data.session?.user
-          if (!user) return alert('You must be logged in')
-
-          const { data: existingLike } = await supabase
-            .from('likes')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('message_id', messageId)
-
-          if (existingLike.length > 0) {
-            alert('You already liked this!')
-            return
-          }
-
-          await supabase.from('likes').insert({ user_id: user.id, message_id: messageId })
-          renderMessages()
-        })
-      })
-    }
-
-    document.getElementById('search-input').addEventListener('input', renderMessages)
-    document.getElementById('sort-select').addEventListener('change', renderMessages)
-    renderMessages()
   </script>
 </body>
 </html>
