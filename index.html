@@ -1,4 +1,4 @@
-[4/4 22:33] Ibrahim: <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -133,7 +133,7 @@
     <p>KikaBits, Solana blockchain üzerinde çalışan yeni nesil bir kripto projedir.</p>
     <p><strong>Kontrat Adresi:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
   </section>
-[4/4 22:35] Ibrahim: <!-- KikaBits - Bölüm 2: Giriş/Üyelik, Kullanıcı Bilgisi, AI Aracı Ekleme -->
+ <!-- KikaBits - Bölüm 2: Giriş/Üyelik, Kullanıcı Bilgisi, AI Aracı Ekleme -->
 <section id="auth-section" class="glass-card">
   <h2>Giriş / Üyelik</h2>
   <input type="email" id="auth-email" placeholder="Email" />
@@ -178,7 +178,7 @@
     <button class="x-button">X Profilime Git</button>
   </a>
 </footer>
-[4/4 22:38] Ibrahim: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -428,7 +428,7 @@
   </script>
 </body>
 </html>
-[4/4 22:41] Ibrahim: <!-- AI Tool Form -->
+ <!-- AI Tool Form -->
 <section id="ai-tools" class="bg-white rounded-2xl shadow-lg p-6 my-6">
   <h2 class="text-xl font-bold mb-4 text-pink-600">AI Aracını Oluştur</h2>
   <form id="tool-form" class="space-y-4">
@@ -459,7 +459,7 @@
     <li class="text-gray-500">Yükleniyor...</li>
   </ul>
 </section>
-[4/4 22:42] Ibrahim: // AI Aracı Gönderme
+ // AI Aracı Gönderme
 document.getElementById('tool-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const session = await supabase.auth.getSession();
@@ -597,14 +597,14 @@ loadUsers();
     color: green;
   }
 </style>
-[4/4 22:43] Ibrahim: <script>
+ <script>
   document.getElementById("contact-form").addEventListener("submit", function (e) {
     e.preventDefault()
     document.getElementById("contact-feedback").textContent = "Mesajınız başarıyla gönderildi. Teşekkür ederiz!"
     this.reset()
   })
 </script>
-[4/4 22:44] Ibrahim: <section id="kika-world" class="bg-white rounded-2xl shadow-lg p-6 mt-6">
+ <section id="kika-world" class="bg-white rounded-2xl shadow-lg p-6 mt-6">
   <h2 class="text-2xl font-bold text-pink-600 mb-4">Kika'nın Dünyası</h2>
   <p class="text-gray-700 mb-4">
     Kika sadece bir coin değil, aynı zamanda bir topluluk, bir hayal ve dijital evcil hayvanınız! Aşağıda Kika'nın
@@ -626,7 +626,7 @@ loadUsers();
     </div>
   </div>
 </section>
-[4/4 22:55] Ibrahim: <section id="community-corner">
+ <section id="community-corner">
   <h2>Topluluk Köşesi</h2>
   <form id="message-form">
     <textarea id="message-text" placeholder="Mesajınızı yazın..." required></textarea>
@@ -707,7 +707,7 @@ loadUsers();
     margin-bottom: 5px;
   }
 </style>
-[4/4 22:57] Ibrahim: // Mesajları yükle ve listele
+ // Mesajları yükle ve listele
 async function loadMessages() {
   const { data: messages, error } = await supabase
     .from('messages')
@@ -774,7 +774,7 @@ loadMessages()
   <button class="like-btn" data-id="123">Beğen</button>
   <span class="like-count">5</span>
 </div>
-[4/4 23:31] Ibrahim: async function loadMessages() {
+ async function loadMessages() {
   const { data: messages } = await supabase
     .from('messages')
     .select('id, content, created_at, user_email')
@@ -830,7 +830,7 @@ loadMessages()
     })
   })
 }
-[4/4 23:31] Ibrahim: <div id="emoji-panel" style="display:none; margin-top:5px;"></div>
+ <div id="emoji-panel" style="display:none; margin-top:5px;"></div>
 <button type="button" id="toggle-emoji">😀</button>
 [4/4 23:32] Ibrahim: #emoji-panel span {
   font-size: 24px;
@@ -860,12 +860,12 @@ emojiPanel.addEventListener('click', (e) => {
     messageInput.value += e.target.textContent
   }
 })
-[4/4 23:33] Ibrahim: <section id="avatar-section" style="display:none;">
+ <section id="avatar-section" style="display:none;">
   <h3>Upload Your Avatar</h3>
   <input type="file" id="avatar-upload" accept="image/*" />
   <button id="upload-avatar-button">Upload Avatar</button>
 </section>
-[4/4 23:33] Ibrahim: document.getElementById('upload-avatar-button').addEventListener('click', async () => {
+document.getElementById('upload-avatar-button').addEventListener('click', async () => {
   const file = document.getElementById('avatar-upload').files[0]
   if (!file) return alert('Please select a file')
 
@@ -901,7 +901,7 @@ emojiPanel.addEventListener('click', (e) => {
     </div>
   </div>
 `
-[4/4 23:33] Ibrahim: async function renderMessages() {
+ async function renderMessages() {
   const { data: messages, error } = await supabase
     .from('messages')
     .select('*, users (username, avatar_url)')
@@ -957,7 +957,7 @@ emojiPanel.addEventListener('click', (e) => {
     })
   })
 }
-[4/4 23:34] Ibrahim: .like-btn {
+ .like-btn {
   background: transparent;
   border: none;
   color: #e25555;
@@ -965,7 +965,7 @@ emojiPanel.addEventListener('click', (e) => {
   font-size: 16px;
   margin-top: 5px;
 }
-[4/4 23:34] Ibrahim: <section id="filter-section">
+ <section id="filter-section">
   <h3>Filtrele & Sırala</h3>
   <input type="text" id="search-input" placeholder="Kelime ara..." />
   <select id="sort-select">
@@ -973,7 +973,7 @@ emojiPanel.addEventListener('click', (e) => {
     <option value="likes">Beğeni Sayısı</option>
   </select>
 </section>
-[4/4 23:34] Ibrahim: async function renderMessages() {
+ async function renderMessages() {
   const searchTerm = document.getElementById('search-input').value.toLowerCase()
   const sortType = document.getElementById('sort-select').value
 
@@ -1042,7 +1042,7 @@ emojiPanel.addEventListener('click', (e) => {
 // Filtre ve sıralama olaylarını tetikle
 document.getElementById('search-input').addEventListener('input', renderMessages)
 document.getElementById('sort-select').addEventListener('change', renderMessages)
-[4/4 23:35] Ibrahim: #filter-section {
+ #filter-section {
   padding: 15px;
   background: #f0f8ff;
   border-radius: 10px;
