@@ -1,11 +1,1057 @@
-<section id="nfts" class="section">
-  <h2>KIKICat NFT Gallery</h2>
-  <div class="nft-gallery">
-    <img src="images/nft1.jpg" alt="NFT 1" />
-    <img src="images/nft2.jpg" alt="NFT 2" />
-    <img src="images/nft3.jpg" alt="NFT 3" />
-    <img src="images/nft4.jpg" alt="NFT 4" />
-    <img src="images/nft5.jpg" alt="NFT 5" />
-    <img src="images/nft6.jpg" alt="NFT 6" />
+[4/4 22:33] Ibrahim: <!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KikaBits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f7c6f7;
+      --secondary: #c5dafa;
+      --accent: #ff9aae;
+      --text: #333;
+      --background: #fff6fc;
+      --card: #ffffff;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background: var(--primary);
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    header img {
+      width: 100px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      background: #ff6c84;
+    }
+
+    section {
+      background: var(--card);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 700px;
+    }
+
+    h1, h2 {
+      color: #222;
+    }
+
+    input, textarea, button {
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: var(--secondary);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #a3c8f0;
+    }
+
+    #photo-display img {
+      margin-top: 15px;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    #user-list li {
+      background: #fafafa;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 8px 0;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://cdn.pixabay.com/photo/2016/03/27/22/16/cat-1285634_1280.png" alt="Kika Cat">
+    <h1>KikaBits Topluluğuna Hoş Geldin</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Anasayfa</a></li>
+        <li><a href="#ai-tools">AI Araçları</a></li>
+        <li><a href="#upload-photo">Fotoğraf</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>KikaBits Nedir?</h2>
+    <p>KikaBits, Solana blockchain üzerinde çalışan yeni nesil bir kripto projedir.</p>
+    <p><strong>Kontrat Adresi:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
+  </section>
+[4/4 22:35] Ibrahim: <!-- KikaBits - Bölüm 2: Giriş/Üyelik, Kullanıcı Bilgisi, AI Aracı Ekleme -->
+<section id="auth-section" class="glass-card">
+  <h2>Giriş / Üyelik</h2>
+  <input type="email" id="auth-email" placeholder="Email" />
+  <input type="password" id="auth-password" placeholder="Şifre" />
+  <div class="button-row">
+    <button id="login-button">Giriş Yap</button>
+    <button id="signup-button">Kayıt Ol</button>
+  </div>
+  <p id="auth-message"></p>
+</section>
+
+<section id="user-info" class="glass-card" style="display:none;">
+  <p>Hoş geldin, <span id="user-email"></span>!</p>
+  <button id="logout-button">Çıkış Yap</button>
+</section>
+
+<section id="ai-tools" class="glass-card">
+  <h2>AI Aracı Oluştur</h2>
+  <form id="tool-form">
+    <input type="text" id="tool-name" placeholder="Araç Adı" required />
+    <textarea id="tool-description" placeholder="Açıklama" required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+  <p id="tool-message"></p>
+</section>
+
+<section id="upload-photo" class="glass-card">
+  <h2>Fotoğraf Paylaş</h2>
+  <input type="file" id="photo-upload" accept="image/*" />
+  <button id="upload-button">Fotoğraf Yükle</button>
+  <div id="photo-display"></div>
+</section>
+
+<section id="users" class="glass-card">
+  <h2>Topluluk Üyeleri</h2>
+  <ul id="user-list"><li>Yükleniyor...</li></ul>
+</section>
+
+<footer>
+  <p>&copy; 2025 KikaBits. Designed by Scam Hunter</p>
+  <a href="https://x.com/EnesS28491677" target="_blank">
+    <button class="x-button">X Profilime Git</button>
+  </a>
+</footer>
+[4/4 22:38] Ibrahim: <!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KikaBits Crypto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to right, #ffe5ec, #e0f7fa);
+      color: #333;
+      padding-bottom: 50px;
+    }
+    header, footer {
+      background: #ff69b4;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 0 0 30px 30px;
+    }
+    header img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      list-style: none;
+      margin-top: 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      background: #ffb6c1;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #ff69b4;
+    }
+    section {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #ff4081;
+      margin-bottom: 10px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff1493;
+      cursor: pointer;
+    }
+    #user-list li {
+      background: #fce4ec;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    #photo-display img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+    footer a button {
+      background: #1DA1F2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.png" alt="Kika the Cute Cat">
+    <h1>Welcome to KikaBits</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ai-tools">AI Tools</a></li>
+        <li><a href="#upload-photo">Photo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>About KikaBits</h2>
+    <p>KikaBits is a playful cryptocurrency on Solana blockchain—light-hearted, fast, and fun!</p>
+    <p><strong>Contract Address:</strong> EzmmnoqcdiPi543K9HjYN5sdZ73xyF683kjwwhNGpump</p>
+  </section>
+
+  <section id="auth-section">
+    <h2>Login / Sign Up</h2>
+    <input type="email" id="auth-email" placeholder="Email" />
+    <input type="password" id="auth-password" placeholder="Password" />
+    <button id="login-button">Login</button>
+    <button id="signup-button">Sign Up</button>
+    <p id="auth-message"></p>
+  </section>
+
+  <section id="user-info" style="display:none;">
+    <p>Welcome, <span id="user-email"></span>!</p>
+    <button id="logout-button">Logout</button>
+  </section>
+
+  <section id="ai-tools">
+    <h2>Create Your Own AI Tool</h2>
+    <form id="tool-form">
+      <input type="text" id="tool-name" placeholder="Tool Name" required />
+      <textarea id="tool-description" placeholder="Description" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="tool-message"></p>
+  </section>
+
+  <section id="upload-photo">
+    <h2>Share a Photo</h2>
+    <input type="file" id="photo-upload" accept="image/*" />
+    <button id="upload-button">Upload Photo</button>
+    <div id="photo-display"></div>
+  </section>
+
+  <section id="users">
+    <h2>Community Users</h2>
+    <ul id="user-list"><li>Loading...</li></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 KikaBits. Created by Scam Hunter</p>
+    <a href="https://x.com/EnesS28491677" target="_blank">
+      <button>Visit My X Profile</button>
+    </a>
+  </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://ugzbsmmaxxklogjwlijrt.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    )
+
+    async function init() {
+      const session = await supabase.auth.getSession()
+      if (session.data.session) showUserUI(session.data.session.user.email)
+
+      const { data: users } = await supabase.from('users').select('*')
+      const list = document.getElementById('user-list')
+      list.innerHTML = ''
+      users?.forEach((u) => {
+        const li = document.createElement('li')
+        li.textContent = u.username || u.email || 'Anon'
+        list.appendChild(li)
+      })
+    }
+    init()
+
+    document.getElementById('login-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Login successful'
+      if (data?.user) showUserUI(data.user.email)
+    }
+
+    document.getElementById('signup-button').onclick = async () => {
+      const email = document.getElementById('auth-email').value
+      const password = document.getElementById('auth-password').value
+      const { error } = await supabase.auth.signUp({ email, password })
+      document.getElementById('auth-message').textContent = error?.message || 'Sign up successful! Please check your email.'
+    }
+
+    document.getElementById('logout-button').onclick = async () => {
+      await supabase.auth.signOut()
+      document.getElementById('user-info').style.display = 'none'
+      document.getElementById('auth-section').style.display = 'block'
+    }
+
+    function showUserUI(email) {
+      document.getElementById('user-email').textContent = email
+      document.getElementById('user-info').style.display = 'block'
+      document.getElementById('auth-section').style.display = 'none'
+    }
+
+    document.getElementById('tool-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('You must be logged in!')
+
+      const name = document.getElementById('tool-name').value
+      const description = document.getElementById('tool-description').value
+      const { error } = await supabase.from('ai_tools').insert({ name, description, user_id: user.id })
+
+      document.getElementById('tool-message').textContent = error?.message || 'AI tool added successfully!'
+      if (!error) document.getElementById('tool-form').reset()
+    })
+
+    document.getElementById('upload-button').addEventListener('click', async () => {
+      const fileInput = document.getElementById('photo-upload')
+      const file = fileInput.files[0]
+      if (!file) return alert('Please choose a file!')
+
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('You must be logged in!')
+
+      const filePath = `${user.id}/${Date.now()}_${file.name}`
+
+      const { error: uploadError } = await supabase.storage.from('photos').upload(filePath, file)
+      if (uploadError) return alert('Upload failed: ' + uploadError.message)
+
+      const { data: urlData } = supabase.storage.from('photos').getPublicUrl(filePath)
+      const displayDiv = document.getElementById('photo-display')
+      const img = document.createElement('img')
+      img.src = urlData.publicUrl
+      displayDiv.innerHTML = ''
+      displayDiv.appendChild(img)
+    })
+  </script>
+</body>
+</html>
+[4/4 22:41] Ibrahim: <!-- AI Tool Form -->
+<section id="ai-tools" class="bg-white rounded-2xl shadow-lg p-6 my-6">
+  <h2 class="text-xl font-bold mb-4 text-pink-600">AI Aracını Oluştur</h2>
+  <form id="tool-form" class="space-y-4">
+    <input type="text" id="tool-name" placeholder="Araç Adı" required
+      class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400" />
+    <textarea id="tool-description" placeholder="Açıklama" required
+      class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"></textarea>
+    <button type="submit"
+      class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition">Gönder</button>
+    <p id="tool-message" class="text-sm text-green-600"></p>
+  </form>
+</section>
+
+<!-- Photo Upload -->
+<section id="upload-photo" class="bg-white rounded-2xl shadow-lg p-6 my-6">
+  <h2 class="text-xl font-bold mb-4 text-blue-600">Bir Fotoğraf Paylaş</h2>
+  <input type="file" id="photo-upload" accept="image/*"
+    class="block mb-4 p-2 border border-gray-300 rounded-xl" />
+  <button id="upload-button"
+    class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition">Yükle</button>
+  <div id="photo-display" class="mt-4"></div>
+</section>
+
+<!-- Community Users -->
+<section id="users" class="bg-white rounded-2xl shadow-lg p-6 my-6">
+  <h2 class="text-xl font-bold mb-4 text-purple-600">Topluluk Kullanıcıları</h2>
+  <ul id="user-list" class="space-y-2">
+    <li class="text-gray-500">Yükleniyor...</li>
+  </ul>
+</section>
+[4/4 22:42] Ibrahim: // AI Aracı Gönderme
+document.getElementById('tool-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const session = await supabase.auth.getSession();
+  const user = session.data.session?.user;
+  if (!user) return alert('Giriş yapmalısınız!');
+
+  const name = document.getElementById('tool-name').value;
+  const description = document.getElementById('tool-description').value;
+
+  const { error } = await supabase.from('ai_tools').insert({
+    name,
+    description,
+    user_id: user.id
+  });
+
+  const msg = document.getElementById('tool-message');
+  msg.textContent = error?.message || 'AI aracı başarıyla eklendi!';
+  msg.className = error ? 'text-red-500' : 'text-green-600';
+
+  if (!error) document.getElementById('tool-form').reset();
+});
+
+// Fotoğraf Yükleme
+document.getElementById('upload-button').addEventListener('click', async () => {
+  const fileInput = document.getElementById('photo-upload');
+  const file = fileInput.files[0];
+  if (!file) return alert('Lütfen bir dosya seçin!');
+
+  const session = await supabase.auth.getSession();
+  const user = session.data.session?.user;
+  if (!user) return alert('Giriş yapmalısınız!');
+
+  const filePath = `${user.id}/${Date.now()}_${file.name}`;
+  const { error: uploadError } = await supabase.storage.from('photos').upload(filePath, file);
+
+  if (uploadError) return alert('Yükleme başarısız: ' + uploadError.message);
+
+  const { data: urlData } = supabase.storage.from('photos').getPublicUrl(filePath);
+  const displayDiv = document.getElementById('photo-display');
+  displayDiv.innerHTML = '';
+
+  const img = document.createElement('img');
+  img.src = urlData.publicUrl;
+  img.className = 'rounded-xl shadow-md mt-2 max-w-full';
+  displayDiv.appendChild(img);
+});
+
+// Kullanıcıları Listeleme
+async function loadUsers() {
+  const { data: users } = await supabase.from('users').select('*');
+  const list = document.getElementById('user-list');
+  list.innerHTML = '';
+
+  users?.forEach((u) => {
+    const li = document.createElement('li');
+    li.className = 'bg-gray-100 p-3 rounded-xl';
+    li.textContent = u.username || u.email || 'Anon';
+    list.appendChild(li);
+  });
+}
+loadUsers();
+[4/4 22:43] Ibrahim: <!-- 5. Bölüm: SSS ve İletişim -->
+<section id="faq">
+  <h2>Sıkça Sorulan Sorular</h2>
+  <details>
+    <summary>KikaBits nedir?</summary>
+    <p>KikaBits, Solana blockchain üzerinde inşa edilmiş eğlenceli ve topluluk odaklı bir kripto para birimidir.</p>
+  </details>
+  <details>
+    <summary>Nasıl kayıt olurum?</summary>
+    <p>Ana sayfadaki "Login / Sign Up" bölümünü kullanarak kolayca kayıt olabilirsiniz.</p>
+  </details>
+  <details>
+    <summary>AI aracı nedir?</summary>
+    <p>Kendi yapay zeka tabanlı araçlarınızı oluşturabileceğiniz kullanıcı dostu bir platform sunuyoruz.</p>
+  </details>
+</section>
+
+<section id="contact">
+  <h2>Bize Ulaşın</h2>
+  <form id="contact-form">
+    <input type="text" id="contact-name" placeholder="Adınız" required />
+    <input type="email" id="contact-email" placeholder="Email" required />
+    <textarea id="contact-message" placeholder="Mesajınız" required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+  <p id="contact-feedback"></p>
+</section>
+
+<style>
+  #faq details {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-left: 5px solid #ff69b4;
+  }
+
+  #faq summary {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  #contact-form {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  #contact-form input, #contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  #contact-form button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  #contact-form button:hover {
+    background-color: #ff1493;
+  }
+
+  #contact-feedback {
+    text-align: center;
+    margin-top: 10px;
+    color: green;
+  }
+</style>
+[4/4 22:43] Ibrahim: <script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault()
+    document.getElementById("contact-feedback").textContent = "Mesajınız başarıyla gönderildi. Teşekkür ederiz!"
+    this.reset()
+  })
+</script>
+[4/4 22:44] Ibrahim: <section id="kika-world" class="bg-white rounded-2xl shadow-lg p-6 mt-6">
+  <h2 class="text-2xl font-bold text-pink-600 mb-4">Kika'nın Dünyası</h2>
+  <p class="text-gray-700 mb-4">
+    Kika sadece bir coin değil, aynı zamanda bir topluluk, bir hayal ve dijital evcil hayvanınız! Aşağıda Kika'nın
+    dünyasından haberleri, güncellemeleri ve sevimli görselleri bulabilirsiniz.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <img src="https://cdn.pixabay.com/photo/2017/11/11/21/59/cat-2948404_1280.jpg" alt="Kika Playful" class="rounded-xl shadow-md">
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-pink-500 mb-2">Kika Ne Yapıyor?</h3>
+      <ul class="list-disc list-inside text-gray-600 space-y-2">
+        <li>Her hafta topluluk oylamalarıyla mini görevler</li>
+        <li>AI destekli hikaye üreticisi</li>
+        <li>Katılımcılara özel NFT çekilişleri</li>
+        <li>Sürpriz etkinliklerde bedava $KIKA</li>
+      </ul>
+    </div>
   </div>
 </section>
+[4/4 22:55] Ibrahim: <section id="community-corner">
+  <h2>Topluluk Köşesi</h2>
+  <form id="message-form">
+    <textarea id="message-text" placeholder="Mesajınızı yazın..." required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+
+  <div id="filter-controls">
+    <label for="filter-input">Kullanıcıya göre filtrele:</label>
+    <input type="text" id="filter-input" placeholder="kullanıcı adı..." />
+  </div>
+
+  <ul id="message-list">
+    <li>Yükleniyor...</li>
+  </ul>
+</section>
+
+<style>
+  #community-corner {
+    padding: 20px;
+    background: #fffafc;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.3);
+    margin: 20px 10px;
+  }
+
+  #community-corner h2 {
+    margin-bottom: 10px;
+  }
+
+  #message-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+  }
+
+  #message-form button {
+    background: #ff69b4;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #filter-controls {
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  #filter-input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+
+  #message-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  #message-list li {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    position: relative;
+  }
+
+  .message-meta {
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 5px;
+  }
+</style>
+[4/4 22:57] Ibrahim: // Mesajları yükle ve listele
+async function loadMessages() {
+  const { data: messages, error } = await supabase
+    .from('messages')
+    .select('id, content, created_at, user_email')
+    .order('created_at', { ascending: false })
+
+  const list = document.getElementById('message-list')
+  list.innerHTML = ''
+
+  if (error) {
+    list.innerHTML = '<li>Mesajlar yüklenemedi.</li>'
+    return
+  }
+
+  messages.forEach(msg => {
+    const li = document.createElement('li')
+    li.innerHTML = `
+      <div class="message-meta">${msg.user_email} - ${new Date(msg.created_at).toLocaleString()}</div>
+      <div class="message-text">${msg.content}</div>
+    `
+    list.appendChild(li)
+  })
+}
+
+// Mesaj gönderme
+document.getElementById('message-form').addEventListener('submit', async (e) => {
+  e.preventDefault()
+
+  const textarea = document.getElementById('message-text')
+  const content = textarea.value.trim()
+  if (!content) return
+
+  const session = await supabase.auth.getSession()
+  const user = session.data.session?.user
+  if (!user) return alert('Giriş yapmalısınız.')
+
+  const { error } = await supabase.from('messages').insert({
+    content,
+    user_email: user.email
+  })
+
+  if (error) {
+    alert('Mesaj gönderilemedi: ' + error.message)
+  } else {
+    textarea.value = ''
+    loadMessages()
+  }
+})
+
+// Filtreleme
+document.getElementById('filter-input').addEventListener('input', () => {
+  const keyword = document.getElementById('filter-input').value.toLowerCase()
+  const messages = document.querySelectorAll('#message-list li')
+
+  messages.forEach(msg => {
+    const email = msg.querySelector('.message-meta')?.textContent?.toLowerCase() || ''
+    msg.style.display = email.includes(keyword) ? 'block' : 'none'
+  })
+})
+
+// Sayfa yüklendiğinde mesajları getir
+loadMessages()
+[4/4 23:31] Ibrahim: <div class="like-section">
+  <button class="like-btn" data-id="123">Beğen</button>
+  <span class="like-count">5</span>
+</div>
+[4/4 23:31] Ibrahim: async function loadMessages() {
+  const { data: messages } = await supabase
+    .from('messages')
+    .select('id, content, created_at, user_email')
+    .order('created_at', { ascending: false })
+
+  const list = document.getElementById('message-list')
+  list.innerHTML = ''
+
+  for (const msg of messages) {
+    const { count } = await supabase
+      .from('likes')
+      .select('*', { count: 'exact', head: true })
+      .eq('message_id', msg.id)
+
+    const li = document.createElement('li')
+    li.innerHTML = `
+      <div class="message-meta">${msg.user_email} - ${new Date(msg.created_at).toLocaleString()}</div>
+      <div class="message-text">${msg.content}</div>
+      <div class="like-section">
+        <button class="like-btn" data-id="${msg.id}">Beğen</button>
+        <span class="like-count">${count}</span>
+      </div>
+    `
+    list.appendChild(li)
+  }
+
+  // Beğeni butonlarına tıklama işlevi
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('Giriş yapmalısınız.')
+
+      const messageId = btn.getAttribute('data-id')
+
+      const { data: existing } = await supabase
+        .from('likes')
+        .select('*')
+        .eq('message_id', messageId)
+        .eq('user_id', user.id)
+
+      if (existing?.length > 0) {
+        alert('Bu mesajı zaten beğendiniz.')
+        return
+      }
+
+      const { error } = await supabase.from('likes').insert({
+        message_id: messageId,
+        user_id: user.id
+      })
+
+      if (!error) loadMessages()
+    })
+  })
+}
+[4/4 23:31] Ibrahim: <div id="emoji-panel" style="display:none; margin-top:5px;"></div>
+<button type="button" id="toggle-emoji">😀</button>
+[4/4 23:32] Ibrahim: #emoji-panel span {
+  font-size: 24px;
+  cursor: pointer;
+  margin: 5px;
+}
+#emoji-panel {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 300px;
+}
+[4/4 23:32] Ibrahim: const emojiPanel = document.getElementById('emoji-panel')
+const emojiBtn = document.getElementById('toggle-emoji')
+const messageInput = document.getElementById('message-content')
+
+const emojis = ['😀','😺','❤️','🔥','😂','😎','😻','🤖','🚀','🎉','💎','👀']
+
+emojiBtn.addEventListener('click', () => {
+  emojiPanel.style.display = emojiPanel.style.display === 'none' ? 'block' : 'none'
+})
+
+emojiPanel.innerHTML = emojis.map(e => `<span>${e}</span>`).join('')
+
+emojiPanel.addEventListener('click', (e) => {
+  if (e.target.tagName === 'SPAN') {
+    messageInput.value += e.target.textContent
+  }
+})
+[4/4 23:33] Ibrahim: <section id="avatar-section" style="display:none;">
+  <h3>Upload Your Avatar</h3>
+  <input type="file" id="avatar-upload" accept="image/*" />
+  <button id="upload-avatar-button">Upload Avatar</button>
+</section>
+[4/4 23:33] Ibrahim: document.getElementById('upload-avatar-button').addEventListener('click', async () => {
+  const file = document.getElementById('avatar-upload').files[0]
+  if (!file) return alert('Please select a file')
+
+  const session = await supabase.auth.getSession()
+  const user = session.data.session?.user
+  if (!user) return alert('Not logged in')
+
+  const filePath = `avatars/${user.id}_${Date.now()}.png`
+
+  const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, {
+    upsert: true
+  })
+
+  if (uploadError) return alert('Upload failed: ' + uploadError.message)
+
+  const { data: urlData } = supabase.storage.from('avatars').getPublicUrl(filePath)
+  const avatarUrl = urlData.publicUrl
+
+  const { error: updateError } = await supabase
+    .from('users')
+    .update({ avatar_url: avatarUrl })
+    .eq('id', user.id)
+
+  if (updateError) return alert('Error updating user: ' + updateError.message)
+  alert('Avatar uploaded successfully!')
+})
+[4/4 23:33] Ibrahim: msgDiv.innerHTML = `
+  <div style="display:flex; align-items:center;">
+    <img src="${msg.avatar_url || 'https://via.placeholder.com/40'}" style="width:40px; height:40px; border-radius:50%; margin-right:10px;">
+    <div>
+      <strong>${msg.username || msg.email}</strong><br/>
+      <span>${msg.content}</span>
+    </div>
+  </div>
+`
+[4/4 23:33] Ibrahim: async function renderMessages() {
+  const { data: messages, error } = await supabase
+    .from('messages')
+    .select('*, users (username, avatar_url)')
+    .order('created_at', { ascending: false })
+
+  const container = document.getElementById('message-list')
+  container.innerHTML = ''
+
+  for (const msg of messages) {
+    const { count: likeCount } = await supabase
+      .from('likes')
+      .select('*', { count: 'exact', head: true })
+      .eq('message_id', msg.id)
+
+    const msgDiv = document.createElement('div')
+    msgDiv.classList.add('msg')
+
+    msgDiv.innerHTML = `
+      <div style="display:flex; align-items:center;">
+        <img src="${msg.users.avatar_url || 'https://via.placeholder.com/40'}" style="width:40px; height:40px; border-radius:50%; margin-right:10px;">
+        <div>
+          <strong>${msg.users.username || msg.users.email}</strong><br/>
+          <span>${msg.content}</span><br/>
+          <button data-id="${msg.id}" class="like-btn">❤️ ${likeCount}</button>
+        </div>
+      </div>
+    `
+
+    container.appendChild(msgDiv)
+  }
+
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const messageId = e.target.dataset.id
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('Giriş yapmalısınız')
+
+      // Daha önce beğendi mi?
+      const { data: existingLike } = await supabase
+        .from('likes')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('message_id', messageId)
+
+      if (existingLike.length > 0) {
+        alert('Zaten beğendiniz!')
+        return
+      }
+
+      await supabase.from('likes').insert({ user_id: user.id, message_id: messageId })
+      renderMessages()
+    })
+  })
+}
+[4/4 23:34] Ibrahim: .like-btn {
+  background: transparent;
+  border: none;
+  color: #e25555;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 5px;
+}
+[4/4 23:34] Ibrahim: <section id="filter-section">
+  <h3>Filtrele & Sırala</h3>
+  <input type="text" id="search-input" placeholder="Kelime ara..." />
+  <select id="sort-select">
+    <option value="newest">En Yeni</option>
+    <option value="likes">Beğeni Sayısı</option>
+  </select>
+</section>
+[4/4 23:34] Ibrahim: async function renderMessages() {
+  const searchTerm = document.getElementById('search-input').value.toLowerCase()
+  const sortType = document.getElementById('sort-select').value
+
+  let { data: messages, error } = await supabase
+    .from('messages')
+    .select('*, users (username, avatar_url), likes(count)')
+    .order('created_at', { ascending: false })
+
+  if (error) return console.error(error)
+
+  // Arama filtresi
+  if (searchTerm) {
+    messages = messages.filter(msg => msg.content.toLowerCase().includes(searchTerm))
+  }
+
+  // Beğeniye göre sırala
+  if (sortType === 'likes') {
+    messages.sort((a, b) => b.likes.length - a.likes.length)
+  }
+
+  const container = document.getElementById('message-list')
+  container.innerHTML = ''
+
+  for (const msg of messages) {
+    const msgDiv = document.createElement('div')
+    msgDiv.classList.add('msg')
+
+    msgDiv.innerHTML = `
+      <div style="display:flex; align-items:center;">
+        <img src="${msg.users.avatar_url || 'https://via.placeholder.com/40'}" style="width:40px; height:40px; border-radius:50%; margin-right:10px;">
+        <div>
+          <strong>${msg.users.username || msg.users.email}</strong><br/>
+          <span>${msg.content}</span><br/>
+          <button data-id="${msg.id}" class="like-btn">❤️ ${msg.likes.length}</button>
+        </div>
+      </div>
+    `
+    container.appendChild(msgDiv)
+  }
+
+  // Like butonları yeniden aktif hale getir
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const messageId = e.target.dataset.id
+      const session = await supabase.auth.getSession()
+      const user = session.data.session?.user
+      if (!user) return alert('Giriş yapmalısınız')
+
+      const { data: existingLike } = await supabase
+        .from('likes')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('message_id', messageId)
+
+      if (existingLike.length > 0) {
+        alert('Zaten beğendiniz!')
+        return
+      }
+
+      await supabase.from('likes').insert({ user_id: user.id, message_id: messageId })
+      renderMessages()
+    })
+  })
+}
+
+// Filtre ve sıralama olaylarını tetikle
+document.getElementById('search-input').addEventListener('input', renderMessages)
+document.getElementById('sort-select').addEventListener('change', renderMessages)
+[4/4 23:35] Ibrahim: #filter-section {
+  padding: 15px;
+  background: #f0f8ff;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+#filter-section input, #filter-section select {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
