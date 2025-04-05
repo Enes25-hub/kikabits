@@ -52,52 +52,6 @@
       font-size: 1rem;
     }
 
-    /* Görsel animasyonu */
-    #mainImage {
-      animation: subtleMotion 10s ease-in-out infinite;
-      transition: filter 1.5s ease-in-out, transform 10s ease-in-out;
-    }
-
-    @keyframes subtleMotion {
-      0%, 100% { transform: scale(1) translateY(0px); opacity: 0.95; }
-      50% { transform: scale(1.01) translateY(-1.5px); opacity: 1; }
-    }
-
-    /* Göz kırpma efektleri için katmanlar */
-    .overlay {
-      position: absolute;
-      pointer-events: none;
-      z-index: 2;
-      border-radius: 50%;
-      background-color: black;
-      opacity: 0.4;
-      animation: blink 6s infinite;
-    }
-
-    .overlay.cat-eye {
-      top: 52%;
-      left: 48.5%;
-      width: 20px;
-      height: 10px;
-    }
-
-    .overlay.human-eye {
-      top: 38%;
-      left: 61.5%;
-      width: 22px;
-      height: 12px;
-    }
-
-    @keyframes blink {
-      0%, 94%, 100% { transform: scaleY(1); }
-      95% { transform: scaleY(0.1); }
-      96% { transform: scaleY(0.05); }
-      97% { transform: scaleY(0.1); }
-      98% { transform: scaleY(0.3); }
-      99% { transform: scaleY(0.6); }
-    }
-
-    /* Müzik kontrol düğmesi */
     #musicToggle {
       position: fixed;
       top: 15px;
@@ -132,10 +86,9 @@
 
   <!-- Müzik -->
   <audio id="bgMusic" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_3f9c97c1c8.mp3?filename=nostalgic-piano-ambient-126186.mp3" type="audio/mpeg">
+    <source src="https://docs.google.com/uc?export=download&id=1hJBkCTLXz48-uZSxK5K8dMrJ3e2-Gx8u" type="audio/mpeg">
   </audio>
   <button id="musicToggle">Pause Music</button>
-
   <!-- Görsel + animasyonlu göz katmanları -->
   <div style="margin: 30px auto 0; text-align: center; max-width: 700px; position: relative;">
     <img id="mainImage" src="your-final-image.png" alt="Abstract surreal illustration"
@@ -143,6 +96,7 @@
     <div class="overlay cat-eye"></div>
     <div class="overlay human-eye"></div>
   </div>
+
   <!-- Alt köşe yazılar -->
   <div class="bottom-left-info">
     <p>no presale</p>
@@ -212,117 +166,112 @@
       to { opacity: 1; }
     }
   </style>
+<script>
+  const message = "The most restless place in the world is exactly where I am";
+  const container = document.getElementById("typewriter-line");
+  let charIndex = 0;
 
-  <script>
-    // Yazının harf harf çıkması
-    const message = "The most restless place in the world is exactly where I am";
-    const container = document.getElementById("typewriter-line");
-    let charIndex = 0;
+  function typeNextLetter() {
+    if (charIndex < message.length) {
+      const span = document.createElement("span");
+      span.textContent = message[charIndex];
+      span.style.opacity = 0;
+      container.appendChild(span);
 
-    function typeNextLetter() {
-      if (charIndex < message.length) {
-        const span = document.createElement("span");
-        span.textContent = message[charIndex];
-        span.style.opacity = 0;
-        container.appendChild(span);
+      setTimeout(() => {
+        span.style.transition = "opacity 0.3s";
+        span.style.opacity = 1;
+      }, 50);
 
-        setTimeout(() => {
-          span.style.transition = "opacity 0.3s";
-          span.style.opacity = 1;
-        }, 50);
-
-        charIndex++;
-        setTimeout(typeNextLetter, 90);
-      }
+      charIndex++;
+      setTimeout(typeNextLetter, 90);
     }
+  }
 
-    window.addEventListener("load", typeNextLetter);
+  window.addEventListener("load", typeNextLetter);
 
-    // Müzik kontrol
-    const music = document.getElementById("bgMusic");
-    const toggleBtn = document.getElementById("musicToggle");
+  const music = document.getElementById("bgMusic");
+  const toggleBtn = document.getElementById("musicToggle");
 
-    toggleBtn.addEventListener("click", () => {
-      if (music.paused) {
-        music.play();
-        toggleBtn.textContent = "Pause Music";
-      } else {
-        music.pause();
-        toggleBtn.textContent = "Play Music";
-      }
-    });
-
-    document.body.addEventListener("click", () => {
-      if (music.paused) {
-        music.play().catch(() => {});
-      }
-    }, { once: true });
-
-    // Tema değiştirme
-    function switchTheme(theme) {
-      const root = document.documentElement;
-      const img = document.getElementById("mainImage");
-
-      img.style.transition = "filter 1.5s ease-in-out, transform 10s ease-in-out";
-
-      switch (theme) {
-        case 'white':
-          root.style.setProperty('--background', '#ffffff');
-          root.style.setProperty('--text', '#000000');
-          root.style.setProperty('--card', '#f2f2f2');
-          root.style.setProperty('--primary', '#333');
-          root.style.setProperty('--accent', '#555');
-          img.style.filter = 'invert(0%) contrast(100%) brightness(100%)';
-          break;
-        case 'blue':
-          root.style.setProperty('--background', '#001f3f');
-          root.style.setProperty('--text', '#ffffff');
-          root.style.setProperty('--card', '#003366');
-          root.style.setProperty('--primary', '#00e0ff');
-          root.style.setProperty('--accent', '#00b7ff');
-          img.style.filter = 'contrast(110%) brightness(120%) saturate(110%)';
-          break;
-        case 'red':
-          root.style.setProperty('--background', '#2b0000');
-          root.style.setProperty('--text', '#fff0f0');
-          root.style.setProperty('--card', '#550000');
-          root.style.setProperty('--primary', '#ff4d4d');
-          root.style.setProperty('--accent', '#ff1a1a');
-          img.style.filter = 'sepia(30%) contrast(110%) saturate(90%)';
-          break;
-        case 'green':
-          root.style.setProperty('--background', '#002b00');
-          root.style.setProperty('--text', '#e6ffe6');
-          root.style.setProperty('--card', '#004d00');
-          root.style.setProperty('--primary', '#00ff99');
-          root.style.setProperty('--accent', '#00cc66');
-          img.style.filter = 'hue-rotate(50deg) contrast(110%) brightness(105%)';
-          break;
-        case 'yellow':
-          root.style.setProperty('--background', '#ffffcc');
-          root.style.setProperty('--text', '#333300');
-          root.style.setProperty('--card', '#ffff99');
-          root.style.setProperty('--primary', '#999900');
-          root.style.setProperty('--accent', '#cccc00');
-          img.style.filter = 'saturate(120%) brightness(110%)';
-          break;
-        case 'gray':
-          root.style.setProperty('--background', '#1e1e1e');
-          root.style.setProperty('--text', '#cccccc');
-          root.style.setProperty('--card', '#2b2b2b');
-          root.style.setProperty('--primary', '#aaaaaa');
-          root.style.setProperty('--accent', '#888888');
-          img.style.filter = 'grayscale(100%) contrast(90%)';
-          break;
-        default:
-          root.style.setProperty('--background', '#000000');
-          root.style.setProperty('--text', '#ffffff');
-          root.style.setProperty('--card', '#111111');
-          root.style.setProperty('--primary', '#00e0ff');
-          root.style.setProperty('--accent', '#00b7ff');
-          img.style.filter = 'brightness(100%) contrast(100%)';
-      }
+  toggleBtn.addEventListener("click", () => {
+    if (music.paused) {
+      music.play();
+      toggleBtn.textContent = "Pause Music";
+    } else {
+      music.pause();
+      toggleBtn.textContent = "Play Music";
     }
-  </script>
+  });
+
+  document.body.addEventListener("click", () => {
+    if (music.paused) {
+      music.play().catch(() => {});
+    }
+  }, { once: true });
+
+  function switchTheme(theme) {
+    const root = document.documentElement;
+    const img = document.getElementById("mainImage");
+    img.style.transition = "filter 1.5s ease-in-out, transform 10s ease-in-out";
+
+    switch (theme) {
+      case 'white':
+        root.style.setProperty('--background', '#ffffff');
+        root.style.setProperty('--text', '#000000');
+        root.style.setProperty('--card', '#f2f2f2');
+        root.style.setProperty('--primary', '#333');
+        root.style.setProperty('--accent', '#555');
+        img.style.filter = 'invert(0%) contrast(100%) brightness(100%)';
+        break;
+      case 'blue':
+        root.style.setProperty('--background', '#001f3f');
+        root.style.setProperty('--text', '#ffffff');
+        root.style.setProperty('--card', '#003366');
+        root.style.setProperty('--primary', '#00e0ff');
+        root.style.setProperty('--accent', '#00b7ff');
+        img.style.filter = 'contrast(110%) brightness(120%) saturate(110%)';
+        break;
+      case 'red':
+        root.style.setProperty('--background', '#2b0000');
+        root.style.setProperty('--text', '#fff0f0');
+        root.style.setProperty('--card', '#550000');
+        root.style.setProperty('--primary', '#ff4d4d');
+        root.style.setProperty('--accent', '#ff1a1a');
+        img.style.filter = 'sepia(30%) contrast(110%) saturate(90%)';
+        break;
+      case 'green':
+        root.style.setProperty('--background', '#002b00');
+        root.style.setProperty('--text', '#e6ffe6');
+        root.style.setProperty('--card', '#004d00');
+        root.style.setProperty('--primary', '#00ff99');
+        root.style.setProperty('--accent', '#00cc66');
+        img.style.filter = 'hue-rotate(50deg) contrast(110%) brightness(105%)';
+        break;
+      case 'yellow':
+        root.style.setProperty('--background', '#ffffcc');
+        root.style.setProperty('--text', '#333300');
+        root.style.setProperty('--card', '#ffff99');
+        root.style.setProperty('--primary', '#999900');
+        root.style.setProperty('--accent', '#cccc00');
+        img.style.filter = 'saturate(120%) brightness(110%)';
+        break;
+      case 'gray':
+        root.style.setProperty('--background', '#1e1e1e');
+        root.style.setProperty('--text', '#cccccc');
+        root.style.setProperty('--card', '#2b2b2b');
+        root.style.setProperty('--primary', '#aaaaaa');
+        root.style.setProperty('--accent', '#888888');
+        img.style.filter = 'grayscale(100%) contrast(90%)';
+        break;
+      default:
+        root.style.setProperty('--background', '#000000');
+        root.style.setProperty('--text', '#ffffff');
+        root.style.setProperty('--card', '#111111');
+        root.style.setProperty('--primary', '#00e0ff');
+        root.style.setProperty('--accent', '#00b7ff');
+        img.style.filter = 'brightness(100%) contrast(100%)';
+    }
+  }
+</script>
 </body>
 </html>
