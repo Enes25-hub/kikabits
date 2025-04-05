@@ -25,6 +25,7 @@
       color: var(--text);
       font-family: 'Quicksand', sans-serif;
       padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
@@ -37,21 +38,87 @@
       color: var(--primary);
     }
 
-    section {
-      max-width: 600px;
-      margin: auto;
-      background: var(--card);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    .theme-selector {
+      margin-top: 10px;
+      text-align: center;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: var(--accent);
-      font-size: 1.8rem;
+    .theme-selector select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #00e0ff;
+      background: #111;
+      color: #fff;
+      font-size: 1rem;
     }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KikaBits</h1>
+    <div class="theme-selector">
+      <label for="theme" style="margin-right: 10px;">Choose Theme:</label>
+      <select id="theme" onchange="switchTheme(this.value)">
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+      </select>
+    </div>
+  </header>
 
+  <script>
+    function switchTheme(theme) {
+      const root = document.documentElement;
+      switch (theme) {
+        case 'white':
+          root.style.setProperty('--background', '#ffffff');
+          root.style.setProperty('--text', '#000000');
+          root.style.setProperty('--card', '#f2f2f2');
+          root.style.setProperty('--primary', '#333');
+          root.style.setProperty('--accent', '#555');
+          break;
+        case 'blue':
+          root.style.setProperty('--background', '#001f3f');
+          root.style.setProperty('--text', '#ffffff');
+          root.style.setProperty('--card', '#003366');
+          root.style.setProperty('--primary', '#00e0ff');
+          root.style.setProperty('--accent', '#00b7ff');
+          break;
+        case 'red':
+          root.style.setProperty('--background', '#2b0000');
+          root.style.setProperty('--text', '#fff0f0');
+          root.style.setProperty('--card', '#550000');
+          root.style.setProperty('--primary', '#ff4d4d');
+          root.style.setProperty('--accent', '#ff1a1a');
+          break;
+        case 'green':
+          root.style.setProperty('--background', '#002b00');
+          root.style.setProperty('--text', '#e6ffe6');
+          root.style.setProperty('--card', '#004d00');
+          root.style.setProperty('--primary', '#00ff99');
+          root.style.setProperty('--accent', '#00cc66');
+          break;
+        default:
+          root.style.setProperty('--background', '#000000');
+          root.style.setProperty('--text', '#ffffff');
+          root.style.setProperty('--card', '#111111');
+          root.style.setProperty('--primary', '#00e0ff');
+          root.style.setProperty('--accent', '#00b7ff');
+      }
+    }
+  </script>
+  <!-- Görsel -->
+  <div style="margin: 30px auto 0; text-align: center; max-width: 500px;">
+    <img src="your-final-image.png" alt="Abstract surreal illustration"
+         style="width: 100%; border-radius: 16px; opacity: 0.95;" />
+  </div>
+
+  <!-- Fade-in ile sol altta 'adil lansman' -->
+  <div class="fade-in-fixed">adil lansman</div>
+
+  <style>
     .fade-in-fixed {
       position: fixed;
       bottom: 10px;
@@ -66,88 +133,27 @@
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    .animated-text {
-      text-align: center;
-      color: #00e0ff;
-      font-size: 1rem;
-      font-weight: bold;
-      margin-top: 30px;
-      letter-spacing: 1px;
-      min-height: 24px;
-    }
   </style>
-</head>
-<body>
-  <header>
-    <h1>KikaBits</h1>
-  </header>
-
-  <section>
-    <h2>What is KikaBits?</h2>
-    <p style="line-height: 1.6; font-size: 1rem;">
-      KikaBits is a creative crypto culture hub blending imagination, code, and community. 
-      Explore surreal visuals, encrypted thoughts, and open-source minds.
-    </p>
-  </section>
-
-  <!-- Yeni görsel -->
-  <div style="margin-top: 40px; text-align: center;">
-    <img src="your-final-image.png" alt="Abstract surreal illustration" style="max-width: 100%; width: 100%; border-radius: 16px; opacity: 0.95;" />
-  </div>
-
-  <!-- Harf harf çıkan yazı -->
-  <div id="animated-line" class="animated-text"></div>
-
-  <!-- Fade-in ile sol altta 'adil lansman' -->
-  <div class="fade-in-fixed">adil lansman</div>
-
   <footer style="text-align: center; margin-top: 50px;">
-    <!-- X (Twitter) butonu -->
     <a href="https://x.com/EnesS28491677?t=nGZuUhVhP6CaKiQsbUqMnw&s=09" target="_blank" style="
       display: inline-flex;
       align-items: center;
       gap: 8px;
       text-decoration: none;
-      background-color: #111;
+      background-color: var(--card);
       padding: 10px 20px;
       border-radius: 12px;
-      color: #00e0ff;
+      color: var(--primary);
       font-weight: bold;
-      border: 1px solid #00e0ff;
+      border: 1px solid var(--primary);
       transition: background 0.3s;
-    " onmouseover="this.style.backgroundColor='#00e0ff'; this.style.color='#000';"
-       onmouseout="this.style.backgroundColor='#111'; this.style.color='#00e0ff';">
+    " onmouseover="this.style.backgroundColor=var(--primary); this.style.color='#000';"
+       onmouseout="this.style.backgroundColor='var(--card)'; this.style.color='var(--primary)';">
       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 24 24">
         <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16.94A1.53 1.53 0 0 0 3.53 22h16.94A1.53 1.53 0 0 0 22 20.47V3.53A1.53 1.53 0 0 0 20.47 2zm-2.56 14.36h-1.36l-2.28-3.1-2.56 3.1H8.84l3.37-4.01L8.7 7.6h1.38l2.11 2.84L14.6 7.6h1.36l-3.18 3.79z"/>
       </svg>
       Follow me on X
     </a>
   </footer>
-
-  <!-- Harf harf yazı animasyonu -->
-  <script>
-    const line = "aslında her şey bundan ibaret";
-    const container = document.getElementById("animated-line");
-    let index = 0;
-
-    function typeLetter() {
-      if (index < line.length) {
-        const span = document.createElement("span");
-        span.textContent = line[index];
-        span.style.opacity = 0;
-        container.appendChild(span);
-
-        setTimeout(() => {
-          span.style.transition = "opacity 0.3s";
-          span.style.opacity = 1;
-        }, 50);
-
-        index++;
-        setTimeout(typeLetter, 90);
-      }
-    }
-
-    window.addEventListener("load", typeLetter);
-  </script>
 </body>
 </html>
