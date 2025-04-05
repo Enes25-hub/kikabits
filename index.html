@@ -1,190 +1,328 @@
-<!-- Otomatik çalan müzik -->
-<audio id="bgMusic" autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_3f9c97c1c8.mp3?filename=nostalgic-piano-ambient-126186.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KikaBits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00e0ff;
+      --background: #000000;
+      --card: #111111;
+      --text: #ffffff;
+      --accent: #00b7ff;
+    }
 
-<style>
-  /* Ana görsel için hafif titreşim ve nefes benzeri efekt */
-  #mainImage {
-    animation: subtleMotion 10s ease-in-out infinite;
-    transform-origin: center center;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  @keyframes subtleMotion {
-    0% { transform: scale(1) translateY(0px); opacity: 0.95; }
-    50% { transform: scale(1.01) translateY(-1.5px); opacity: 1; }
-    100% { transform: scale(1) translateY(0px); opacity: 0.95; }
-  }
-</style>
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: 'Quicksand', sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-<script>
-  // Müzik sesini otomatik başlatmak için kullanıcı etkileşimi kontrolü (bazı tarayıcı kısıtları için)
-  window.addEventListener("click", function() {
-    const music = document.getElementById("bgMusic");
-    if (music.paused) music.play();
-  });
-</script><!-- Hareketli katmanlar (göz kırpma ve baş eğme gibi) -->
-<style>
-  .overlay {
-    position: absolute;
-    pointer-events: none;
-    z-index: 10;
-  }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-  .eye-blink {
-    width: 20px;
-    height: 10px;
-    background-color: #000;
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: blink 6s infinite;
-  }
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
 
-  .eye-blink.cat-eye {
-    top: 52%;
-    left: 48.5%;
-  }
+    .theme-selector {
+      margin-top: 10px;
+      text-align: center;
+    }
 
-  .eye-blink.human-eye {
-    top: 38%;
-    left: 61.5%;
-    width: 22px;
-    height: 12px;
-  }
+    .theme-selector select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #00e0ff;
+      background: #111;
+      color: #fff;
+      font-size: 1rem;
+    }
 
-  @keyframes blink {
-    0%, 94%, 100% { transform: scaleY(1); }
-    95% { transform: scaleY(0.1); }
-    96% { transform: scaleY(0.05); }
-    97% { transform: scaleY(0.1); }
-    98% { transform: scaleY(0.3); }
-    99% { transform: scaleY(0.6); }
-  }
+    /* Görsel animasyonu */
+    #mainImage {
+      animation: subtleMotion 10s ease-in-out infinite;
+      transition: filter 1.5s ease-in-out, transform 10s ease-in-out;
+    }
 
-  .image-container {
-    position: relative;
-    display: inline-block;
-  }
-</style>
+    @keyframes subtleMotion {
+      0%, 100% { transform: scale(1) translateY(0px); opacity: 0.95; }
+      50% { transform: scale(1.01) translateY(-1.5px); opacity: 1; }
+    }
 
-<!-- Görsel ve katmanlar -->
-<div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
-  <div class="image-container">
+    /* Göz kırpma efektleri için katmanlar */
+    .overlay {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 50%;
+      background-color: black;
+      opacity: 0.4;
+      animation: blink 6s infinite;
+    }
+
+    .overlay.cat-eye {
+      top: 52%;
+      left: 48.5%;
+      width: 20px;
+      height: 10px;
+    }
+
+    .overlay.human-eye {
+      top: 38%;
+      left: 61.5%;
+      width: 22px;
+      height: 12px;
+    }
+
+    @keyframes blink {
+      0%, 94%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+      96% { transform: scaleY(0.05); }
+      97% { transform: scaleY(0.1); }
+      98% { transform: scaleY(0.3); }
+      99% { transform: scaleY(0.6); }
+    }
+
+    /* Müzik kontrol düğmesi */
+    #musicToggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 9999;
+      background-color: var(--card);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KikaBits</h1>
+    <div class="theme-selector">
+      <label for="theme" style="margin-right: 10px;">Choose Theme:</label>
+      <select id="theme" onchange="switchTheme(this.value)">
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="gray">Gray</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Müzik -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_3f9c97c1c8.mp3?filename=nostalgic-piano-ambient-126186.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicToggle">Pause Music</button>
+
+  <!-- Görsel + animasyonlu göz katmanları -->
+  <div style="margin: 30px auto 0; text-align: center; max-width: 700px; position: relative;">
     <img id="mainImage" src="your-final-image.png" alt="Abstract surreal illustration"
          style="width: 100%; border-radius: 16px; opacity: 0.95;" />
-    <!-- Kedinin gözü -->
-    <div class="overlay eye-blink cat-eye" style="position: absolute;"></div>
-    <!-- İnsan figürünün gözü -->
-    <div class="overlay eye-blink human-eye" style="position: absolute;"></div>
+    <div class="overlay cat-eye"></div>
+    <div class="overlay human-eye"></div>
   </div>
-</div>
-<style>
-  /* Tema değiştiğinde görselin filtresi yumuşak geçişle değişsin */
-  #mainImage {
-    transition: filter 1.5s ease-in-out, transform 10s ease-in-out;
-  }
-</style>
+  <!-- Alt köşe yazılar -->
+  <div class="bottom-left-info">
+    <p>no presale</p>
+    <p>no dev multi-wallet</p>
+  </div>
 
-<script>
-  // Güncellenmiş switchTheme fonksiyonu (filtre geçişleri animasyonlu olur)
-  function switchTheme(theme) {
-    const root = document.documentElement;
-    const img = document.getElementById("mainImage");
+  <!-- Harf harf çıkan yazı -->
+  <div id="typewriter-line" class="typewriter-text"></div>
 
-    img.style.transition = "filter 1.5s ease-in-out, transform 10s ease-in-out";
+  <!-- Fade-in ile sol altta 'adil lansman' -->
+  <div class="fade-in-fixed">adil lansman</div>
 
-    switch (theme) {
-      case 'white':
-        root.style.setProperty('--background', '#ffffff');
-        root.style.setProperty('--text', '#000000');
-        root.style.setProperty('--card', '#f2f2f2');
-        root.style.setProperty('--primary', '#333');
-        root.style.setProperty('--accent', '#555');
-        img.style.filter = 'invert(0%) contrast(100%) brightness(100%)';
-        break;
-      case 'blue':
-        root.style.setProperty('--background', '#001f3f');
-        root.style.setProperty('--text', '#ffffff');
-        root.style.setProperty('--card', '#003366');
-        root.style.setProperty('--primary', '#00e0ff');
-        root.style.setProperty('--accent', '#00b7ff');
-        img.style.filter = 'contrast(110%) brightness(120%) saturate(110%)';
-        break;
-      case 'red':
-        root.style.setProperty('--background', '#2b0000');
-        root.style.setProperty('--text', '#fff0f0');
-        root.style.setProperty('--card', '#550000');
-        root.style.setProperty('--primary', '#ff4d4d');
-        root.style.setProperty('--accent', '#ff1a1a');
-        img.style.filter = 'sepia(30%) contrast(110%) saturate(90%)';
-        break;
-      case 'green':
-        root.style.setProperty('--background', '#002b00');
-        root.style.setProperty('--text', '#e6ffe6');
-        root.style.setProperty('--card', '#004d00');
-        root.style.setProperty('--primary', '#00ff99');
-        root.style.setProperty('--accent', '#00cc66');
-        img.style.filter = 'hue-rotate(50deg) contrast(110%) brightness(105%)';
-        break;
-      case 'yellow':
-        root.style.setProperty('--background', '#ffffcc');
-        root.style.setProperty('--text', '#333300');
-        root.style.setProperty('--card', '#ffff99');
-        root.style.setProperty('--primary', '#999900');
-        root.style.setProperty('--accent', '#cccc00');
-        img.style.filter = 'saturate(120%) brightness(110%)';
-        break;
-      case 'gray':
-        root.style.setProperty('--background', '#1e1e1e');
-        root.style.setProperty('--text', '#cccccc');
-        root.style.setProperty('--card', '#2b2b2b');
-        root.style.setProperty('--primary', '#aaaaaa');
-        root.style.setProperty('--accent', '#888888');
-        img.style.filter = 'grayscale(100%) contrast(90%)';
-        break;
-      default:
-        root.style.setProperty('--background', '#000000');
-        root.style.setProperty('--text', '#ffffff');
-        root.style.setProperty('--card', '#111111');
-        root.style.setProperty('--primary', '#00e0ff');
-        root.style.setProperty('--accent', '#00b7ff');
-        img.style.filter = 'brightness(100%) contrast(100%)';
+  <footer style="text-align: center; margin-top: 50px;">
+    <a href="https://x.com/EnesS28491677?t=nGZuUhVhP6CaKiQsbUqMnw&s=09" target="_blank" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      background-color: var(--card);
+      padding: 10px 20px;
+      border-radius: 12px;
+      color: var(--primary);
+      font-weight: bold;
+      border: 1px solid var(--primary);
+      transition: background 0.3s;
+    " onmouseover="this.style.backgroundColor=var(--primary); this.style.color='#000';"
+       onmouseout="this.style.backgroundColor='var(--card)'; this.style.color='var(--primary)';">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 24 24">
+        <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16.94A1.53 1.53 0 0 0 3.53 22h16.94A1.53 1.53 0 0 0 22 20.47V3.53A1.53 1.53 0 0 0 20.47 2zm-2.56 14.36h-1.36l-2.28-3.1-2.56 3.1H8.84l3.37-4.01L8.7 7.6h1.38l2.11 2.84L14.6 7.6h1.36l-3.18 3.79z"/>
+      </svg>
+      Follow me on X
+    </a>
+  </footer>
+  <style>
+    .bottom-left-info {
+      position: fixed;
+      bottom: 40px;
+      left: 15px;
+      color: #888;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      z-index: 1000;
     }
-  }
-</script>
-<!-- Müzik kontrol butonu -->
-<div style="position: fixed; top: 15px; right: 20px; z-index: 1000;">
-  <button id="musicToggle" style="
-    background-color: var(--card);
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    cursor: pointer;
-  ">Pause Music</button>
-</div>
 
-<script>
-  const music = document.getElementById("bgMusic");
-  const toggleBtn = document.getElementById("musicToggle");
-
-  toggleBtn.addEventListener("click", () => {
-    if (music.paused) {
-      music.play();
-      toggleBtn.textContent = "Pause Music";
-    } else {
-      music.pause();
-      toggleBtn.textContent = "Play Music";
+    .typewriter-text {
+      text-align: center;
+      color: var(--primary);
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 40px;
+      letter-spacing: 1px;
+      min-height: 24px;
     }
-  });
 
-  // Otomatik başlatmayı tarayıcı engellerse kullanıcı tıklayınca devreye sokar
-  window.addEventListener("DOMContentLoaded", () => {
+    .fade-in-fixed {
+      position: fixed;
+      bottom: 10px;
+      left: 15px;
+      color: #666;
+      font-size: 0.85rem;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      z-index: 1000;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+
+  <script>
+    // Yazının harf harf çıkması
+    const message = "The most restless place in the world is exactly where I am";
+    const container = document.getElementById("typewriter-line");
+    let charIndex = 0;
+
+    function typeNextLetter() {
+      if (charIndex < message.length) {
+        const span = document.createElement("span");
+        span.textContent = message[charIndex];
+        span.style.opacity = 0;
+        container.appendChild(span);
+
+        setTimeout(() => {
+          span.style.transition = "opacity 0.3s";
+          span.style.opacity = 1;
+        }, 50);
+
+        charIndex++;
+        setTimeout(typeNextLetter, 90);
+      }
+    }
+
+    window.addEventListener("load", typeNextLetter);
+
+    // Müzik kontrol
+    const music = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("musicToggle");
+
+    toggleBtn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "Pause Music";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "Play Music";
+      }
+    });
+
     document.body.addEventListener("click", () => {
-      if (music.paused) music.play().catch(() => {});
+      if (music.paused) {
+        music.play().catch(() => {});
+      }
     }, { once: true });
-  });
-</script>
 
+    // Tema değiştirme
+    function switchTheme(theme) {
+      const root = document.documentElement;
+      const img = document.getElementById("mainImage");
+
+      img.style.transition = "filter 1.5s ease-in-out, transform 10s ease-in-out";
+
+      switch (theme) {
+        case 'white':
+          root.style.setProperty('--background', '#ffffff');
+          root.style.setProperty('--text', '#000000');
+          root.style.setProperty('--card', '#f2f2f2');
+          root.style.setProperty('--primary', '#333');
+          root.style.setProperty('--accent', '#555');
+          img.style.filter = 'invert(0%) contrast(100%) brightness(100%)';
+          break;
+        case 'blue':
+          root.style.setProperty('--background', '#001f3f');
+          root.style.setProperty('--text', '#ffffff');
+          root.style.setProperty('--card', '#003366');
+          root.style.setProperty('--primary', '#00e0ff');
+          root.style.setProperty('--accent', '#00b7ff');
+          img.style.filter = 'contrast(110%) brightness(120%) saturate(110%)';
+          break;
+        case 'red':
+          root.style.setProperty('--background', '#2b0000');
+          root.style.setProperty('--text', '#fff0f0');
+          root.style.setProperty('--card', '#550000');
+          root.style.setProperty('--primary', '#ff4d4d');
+          root.style.setProperty('--accent', '#ff1a1a');
+          img.style.filter = 'sepia(30%) contrast(110%) saturate(90%)';
+          break;
+        case 'green':
+          root.style.setProperty('--background', '#002b00');
+          root.style.setProperty('--text', '#e6ffe6');
+          root.style.setProperty('--card', '#004d00');
+          root.style.setProperty('--primary', '#00ff99');
+          root.style.setProperty('--accent', '#00cc66');
+          img.style.filter = 'hue-rotate(50deg) contrast(110%) brightness(105%)';
+          break;
+        case 'yellow':
+          root.style.setProperty('--background', '#ffffcc');
+          root.style.setProperty('--text', '#333300');
+          root.style.setProperty('--card', '#ffff99');
+          root.style.setProperty('--primary', '#999900');
+          root.style.setProperty('--accent', '#cccc00');
+          img.style.filter = 'saturate(120%) brightness(110%)';
+          break;
+        case 'gray':
+          root.style.setProperty('--background', '#1e1e1e');
+          root.style.setProperty('--text', '#cccccc');
+          root.style.setProperty('--card', '#2b2b2b');
+          root.style.setProperty('--primary', '#aaaaaa');
+          root.style.setProperty('--accent', '#888888');
+          img.style.filter = 'grayscale(100%) contrast(90%)';
+          break;
+        default:
+          root.style.setProperty('--background', '#000000');
+          root.style.setProperty('--text', '#ffffff');
+          root.style.setProperty('--card', '#111111');
+          root.style.setProperty('--primary', '#00e0ff');
+          root.style.setProperty('--accent', '#00b7ff');
+          img.style.filter = 'brightness(100%) contrast(100%)';
+      }
+    }
+  </script>
+</body>
+</html>
