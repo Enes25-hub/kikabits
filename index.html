@@ -109,16 +109,42 @@
       }
     }
   </script>
+
   <!-- Görsel -->
-  <div style="margin: 30px auto 0; text-align: center; max-width: 500px;">
+  <div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
     <img src="your-final-image.png" alt="Abstract surreal illustration"
          style="width: 100%; border-radius: 16px; opacity: 0.95;" />
   </div>
+  <!-- Alt köşe bilgilendirme -->
+  <div class="bottom-left-info">
+    <p>no presale</p>
+    <p>no dev multi-wallet</p>
+  </div>
 
-  <!-- Fade-in ile sol altta 'adil lansman' -->
-  <div class="fade-in-fixed">adil lansman</div>
+  <!-- Harf harf yazı -->
+  <div id="typewriter-line" class="typewriter-text"></div>
 
   <style>
+    .bottom-left-info {
+      position: fixed;
+      bottom: 40px;
+      left: 15px;
+      color: #888;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      z-index: 1000;
+    }
+
+    .typewriter-text {
+      text-align: center;
+      color: var(--primary);
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 40px;
+      letter-spacing: 1px;
+      min-height: 24px;
+    }
+
     .fade-in-fixed {
       position: fixed;
       bottom: 10px;
@@ -134,6 +160,34 @@
       to { opacity: 1; }
     }
   </style>
+  <script>
+    const message = "The most restless place in the world is exactly where I am";
+    const container = document.getElementById("typewriter-line");
+    let charIndex = 0;
+
+    function typeNextLetter() {
+      if (charIndex < message.length) {
+        const span = document.createElement("span");
+        span.textContent = message[charIndex];
+        span.style.opacity = 0;
+        container.appendChild(span);
+
+        setTimeout(() => {
+          span.style.transition = "opacity 0.3s";
+          span.style.opacity = 1;
+        }, 50);
+
+        charIndex++;
+        setTimeout(typeNextLetter, 90);
+      }
+    }
+
+    window.addEventListener("load", typeNextLetter);
+  </script>
+
+  <!-- Fade-in ile sol altta 'adil lansman' -->
+  <div class="fade-in-fixed">adil lansman</div>
+
   <footer style="text-align: center; margin-top: 50px;">
     <a href="https://x.com/EnesS28491677?t=nGZuUhVhP6CaKiQsbUqMnw&s=09" target="_blank" style="
       display: inline-flex;
