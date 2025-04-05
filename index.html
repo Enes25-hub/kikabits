@@ -64,13 +64,16 @@
         <option value="blue">Blue</option>
         <option value="red">Red</option>
         <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="gray">Gray</option>
       </select>
     </div>
   </header>
-
   <script>
     function switchTheme(theme) {
       const root = document.documentElement;
+      const img = document.getElementById("mainImage");
+
       switch (theme) {
         case 'white':
           root.style.setProperty('--background', '#ffffff');
@@ -78,6 +81,7 @@
           root.style.setProperty('--card', '#f2f2f2');
           root.style.setProperty('--primary', '#333');
           root.style.setProperty('--accent', '#555');
+          img.style.filter = 'invert(0%) contrast(100%)';
           break;
         case 'blue':
           root.style.setProperty('--background', '#001f3f');
@@ -85,6 +89,7 @@
           root.style.setProperty('--card', '#003366');
           root.style.setProperty('--primary', '#00e0ff');
           root.style.setProperty('--accent', '#00b7ff');
+          img.style.filter = 'contrast(110%) brightness(120%)';
           break;
         case 'red':
           root.style.setProperty('--background', '#2b0000');
@@ -92,6 +97,7 @@
           root.style.setProperty('--card', '#550000');
           root.style.setProperty('--primary', '#ff4d4d');
           root.style.setProperty('--accent', '#ff1a1a');
+          img.style.filter = 'sepia(30%) contrast(110%)';
           break;
         case 'green':
           root.style.setProperty('--background', '#002b00');
@@ -99,6 +105,23 @@
           root.style.setProperty('--card', '#004d00');
           root.style.setProperty('--primary', '#00ff99');
           root.style.setProperty('--accent', '#00cc66');
+          img.style.filter = 'hue-rotate(50deg) contrast(110%)';
+          break;
+        case 'yellow':
+          root.style.setProperty('--background', '#ffffcc');
+          root.style.setProperty('--text', '#333300');
+          root.style.setProperty('--card', '#ffff99');
+          root.style.setProperty('--primary', '#999900');
+          root.style.setProperty('--accent', '#cccc00');
+          img.style.filter = 'saturate(120%)';
+          break;
+        case 'gray':
+          root.style.setProperty('--background', '#1e1e1e');
+          root.style.setProperty('--text', '#cccccc');
+          root.style.setProperty('--card', '#2b2b2b');
+          root.style.setProperty('--primary', '#aaaaaa');
+          root.style.setProperty('--accent', '#888888');
+          img.style.filter = 'grayscale(100%)';
           break;
         default:
           root.style.setProperty('--background', '#000000');
@@ -106,22 +129,23 @@
           root.style.setProperty('--card', '#111111');
           root.style.setProperty('--primary', '#00e0ff');
           root.style.setProperty('--accent', '#00b7ff');
+          img.style.filter = 'brightness(100%)';
       }
     }
   </script>
 
   <!-- Görsel -->
   <div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
-    <img src="your-final-image.png" alt="Abstract surreal illustration"
+    <img id="mainImage" src="your-final-image.png" alt="Abstract surreal illustration"
          style="width: 100%; border-radius: 16px; opacity: 0.95;" />
   </div>
-  <!-- Alt köşe bilgilendirme -->
+  <!-- Alt köşe yazılar -->
   <div class="bottom-left-info">
     <p>no presale</p>
     <p>no dev multi-wallet</p>
   </div>
 
-  <!-- Harf harf yazı -->
+  <!-- Harf harf çıkan yazı -->
   <div id="typewriter-line" class="typewriter-text"></div>
 
   <style>
