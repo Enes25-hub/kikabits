@@ -13,13 +13,7 @@
       --text: #ffffff;
       --accent: #00b7ff;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background-color: var(--background);
       color: var(--text);
@@ -27,22 +21,9 @@
       padding: 20px;
       transition: background-color 0.3s, color 0.3s;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      color: var(--primary);
-    }
-
-    .theme-selector {
-      margin-top: 10px;
-      text-align: center;
-    }
-
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { font-size: 2.5rem; color: var(--primary); }
+    .theme-selector { margin-top: 10px; text-align: center; }
     .theme-selector select {
       padding: 8px 12px;
       border-radius: 8px;
@@ -50,6 +31,16 @@
       background: #111;
       color: #fff;
       font-size: 1rem;
+    }
+    #sadCat.move-sad {
+      animation: sadMove 3s infinite ease-in-out;
+    }
+    @keyframes sadMove {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      25% { transform: translateY(1px) rotate(-0.5deg); opacity: 0.98; }
+      50% { transform: translateY(0) rotate(0.5deg); opacity: 0.96; }
+      75% { transform: translateY(-1px) rotate(0); opacity: 0.98; }
+      100% { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -69,11 +60,58 @@
       </select>
     </div>
   </header>
+  <!-- Görsel ve müzik -->
+  <div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
+    <img id="sadCat" src="your-final-image.png" alt="Sad cat illustration"
+         style="width: 100%; border-radius: 16px; opacity: 0.95;" />
+  </div>
+
+  <audio id="themeMusic" src="music/sad-theme.mp3" preload="auto" loop></audio>
+
+  <div class="bottom-left-info">
+    <p>no presale</p>
+    <p>no dev multi-wallet</p>
+  </div>
+
+  <div id="typewriter-line" class="typewriter-text"></div>
+
+  <div class="fade-in-fixed">adil lansman</div>
+
+  <footer style="text-align: center; margin-top: 50px;">
+    <a href="https://x.com/EnesS28491677?t=nGZuUhVhP6CaKiQsbUqMnw&s=09" target="_blank" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      background-color: var(--card);
+      padding: 10px 20px;
+      border-radius: 12px;
+      color: var(--primary);
+      font-weight: bold;
+      border: 1px solid var(--primary);
+      transition: background 0.3s;
+    " onmouseover="this.style.backgroundColor=var(--primary); this.style.color='#000';"
+       onmouseout="this.style.backgroundColor='var(--card)'; this.style.color='var(--primary)';">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 24 24">
+        <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16.94A1.53 1.53 0 0 0 3.53 22h16.94A1.53 1.53 0 0 0 22 20.47V3.53A1.53 1.53 0 0 0 20.47 2zm-2.56 14.36h-1.36l-2.28-3.1-2.56 3.1H8.84l3.37-4.01L8.7 7.6h1.38l2.11 2.84L14.6 7.6h1.36l-3.18 3.79z"/>
+      </svg>
+      Follow me on X
+    </a>
+  </footer>
+
   <script>
+    const audio = document.getElementById("themeMusic");
+    const cat = document.getElementById("sadCat");
+
+    window.addEventListener("load", () => {
+      audio.volume = 0.3;
+      audio.play().catch(() => {});
+      cat.classList.add("move-sad");
+    });
+
     function switchTheme(theme) {
       const root = document.documentElement;
-      const img = document.getElementById("mainImage");
-
+      const img = document.getElementById("sadCat");
       switch (theme) {
         case 'white':
           root.style.setProperty('--background', '#ffffff');
@@ -132,106 +170,25 @@
           img.style.filter = 'brightness(100%)';
       }
     }
-  </script>
 
-  <!-- Görsel -->
-  <div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
-    <img id="mainImage" src="your-final-image.png" alt="Abstract surreal illustration"
-         style="width: 100%; border-radius: 16px; opacity: 0.95;" />
-  </div>
-  <!-- Alt köşe yazılar -->
-  <div class="bottom-left-info">
-    <p>no presale</p>
-    <p>no dev multi-wallet</p>
-  </div>
-
-  <!-- Harf harf çıkan yazı -->
-  <div id="typewriter-line" class="typewriter-text"></div>
-
-  <style>
-    .bottom-left-info {
-      position: fixed;
-      bottom: 40px;
-      left: 15px;
-      color: #888;
-      font-size: 0.85rem;
-      line-height: 1.4;
-      z-index: 1000;
-    }
-
-    .typewriter-text {
-      text-align: center;
-      color: var(--primary);
-      font-size: 1rem;
-      font-weight: bold;
-      margin-top: 40px;
-      letter-spacing: 1px;
-      min-height: 24px;
-    }
-
-    .fade-in-fixed {
-      position: fixed;
-      bottom: 10px;
-      left: 15px;
-      color: #666;
-      font-size: 0.85rem;
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
-      z-index: 1000;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-  </style>
-  <script>
-    const message = "The most restless place in the world is exactly where I am";
-    const container = document.getElementById("typewriter-line");
-    let charIndex = 0;
-
+    const msg = "The most restless place in the world is exactly where I am";
+    const box = document.getElementById("typewriter-line");
+    let i = 0;
     function typeNextLetter() {
-      if (charIndex < message.length) {
+      if (i < msg.length) {
         const span = document.createElement("span");
-        span.textContent = message[charIndex];
+        span.textContent = msg[i];
         span.style.opacity = 0;
-        container.appendChild(span);
-
+        box.appendChild(span);
         setTimeout(() => {
           span.style.transition = "opacity 0.3s";
           span.style.opacity = 1;
         }, 50);
-
-        charIndex++;
+        i++;
         setTimeout(typeNextLetter, 90);
       }
     }
-
     window.addEventListener("load", typeNextLetter);
   </script>
-
-  <!-- Fade-in ile sol altta 'adil lansman' -->
-  <div class="fade-in-fixed">adil lansman</div>
-
-  <footer style="text-align: center; margin-top: 50px;">
-    <a href="https://x.com/EnesS28491677?t=nGZuUhVhP6CaKiQsbUqMnw&s=09" target="_blank" style="
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      background-color: var(--card);
-      padding: 10px 20px;
-      border-radius: 12px;
-      color: var(--primary);
-      font-weight: bold;
-      border: 1px solid var(--primary);
-      transition: background 0.3s;
-    " onmouseover="this.style.backgroundColor=var(--primary); this.style.color='#000';"
-       onmouseout="this.style.backgroundColor='var(--card)'; this.style.color='var(--primary)';">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 24 24">
-        <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16.94A1.53 1.53 0 0 0 3.53 22h16.94A1.53 1.53 0 0 0 22 20.47V3.53A1.53 1.53 0 0 0 20.47 2zm-2.56 14.36h-1.36l-2.28-3.1-2.56 3.1H8.84l3.37-4.01L8.7 7.6h1.38l2.11 2.84L14.6 7.6h1.36l-3.18 3.79z"/>
-      </svg>
-      Follow me on X
-    </a>
-  </footer>
 </body>
 </html>
