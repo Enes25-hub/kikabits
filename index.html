@@ -13,7 +13,13 @@
       --text: #ffffff;
       --accent: #00b7ff;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background-color: var(--background);
       color: var(--text);
@@ -21,9 +27,22 @@
       padding: 20px;
       transition: background-color 0.3s, color 0.3s;
     }
-    header { text-align: center; margin-bottom: 30px; }
-    header h1 { font-size: 2.5rem; color: var(--primary); }
-    .theme-selector { margin-top: 10px; text-align: center; }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .theme-selector {
+      margin-top: 10px;
+      text-align: center;
+    }
+
     .theme-selector select {
       padding: 8px 12px;
       border-radius: 8px;
@@ -32,9 +51,11 @@
       color: #fff;
       font-size: 1rem;
     }
+
     #sadCat.move-sad {
       animation: sadMove 3s infinite ease-in-out;
     }
+
     @keyframes sadMove {
       0% { transform: translateY(0) rotate(0); opacity: 1; }
       25% { transform: translateY(1px) rotate(-0.5deg); opacity: 0.98; }
@@ -61,20 +82,23 @@
     </div>
   </header>
   <!-- Görsel ve müzik -->
-  <div style="margin: 30px auto 0; text-align: center; max-width: 700px;">
-    <img id="sadCat" src="your-final-image.png" alt="Sad cat illustration"
-         style="width: 100%; border-radius: 16px; opacity: 0.95;" />
+  <div style="margin-top: 40px; text-align: center;">
+    <img id="sadCat" src="your-final-image.png" alt="Abstract surreal illustration"
+         style="max-width: 100%; width: 100%; border-radius: 16px; opacity: 0.95;" />
   </div>
 
   <audio id="themeMusic" src="music/sad-theme.mp3" preload="auto" loop></audio>
 
+  <!-- Harf harf çıkan yazı -->
+  <div id="typewriter-line" class="animated-text"></div>
+
+  <!-- Sol alttaki bilgiler -->
   <div class="bottom-left-info">
     <p>no presale</p>
     <p>no dev multi-wallet</p>
   </div>
 
-  <div id="typewriter-line" class="typewriter-text"></div>
-
+  <!-- Fade-in ile sol altta 'adil lansman' -->
   <div class="fade-in-fixed">adil lansman</div>
 
   <footer style="text-align: center; margin-top: 50px;">
@@ -93,12 +117,7 @@
     " onmouseover="this.style.backgroundColor=var(--primary); this.style.color='#000';"
        onmouseout="this.style.backgroundColor='var(--card)'; this.style.color='var(--primary)';">
       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 24 24">
-        <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16.94A1.53 1.53 0 0 0 3.53 22h16.94A1.53 1.53 0 0 0 22 20.47V3.53A1.53 1.53 0 0 0 20.47 2zm-2.56 14.36h-1.36l-2.28-3.1-2.56 3.1H8.84l3.37-4.01L8.7 7.6h1.38l2.11 2.84L14.6 7.6h1.36l-3.18 3.79z"/>
-      </svg>
-      Follow me on X
-    </a>
-  </footer>
-
+        <path d="M20.47 2H3.53A1.53 1.53 0 0 0 2 3.53v16. &#8203;:contentReference[oaicite:0]{index=0}&#8203;
   <script>
     const audio = document.getElementById("themeMusic");
     const cat = document.getElementById("sadCat");
@@ -171,23 +190,27 @@
       }
     }
 
-    const msg = "The most restless place in the world is exactly where I am";
-    const box = document.getElementById("typewriter-line");
-    let i = 0;
+    const message = "The most restless place in the world is exactly where I am";
+    const container = document.getElementById("typewriter-line");
+    let index = 0;
+
     function typeNextLetter() {
-      if (i < msg.length) {
+      if (index < message.length) {
         const span = document.createElement("span");
-        span.textContent = msg[i];
+        span.textContent = message[index];
         span.style.opacity = 0;
-        box.appendChild(span);
+        container.appendChild(span);
+
         setTimeout(() => {
           span.style.transition = "opacity 0.3s";
           span.style.opacity = 1;
         }, 50);
-        i++;
+
+        index++;
         setTimeout(typeNextLetter, 90);
       }
     }
+
     window.addEventListener("load", typeNextLetter);
   </script>
 </body>
